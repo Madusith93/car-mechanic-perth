@@ -1,0 +1,12 @@
+{
+  "services": [
+    "Logbook Service",
+    "Brake Repair",
+    "Engine Diagnostics",
+    "Suspension & Steering",
+    "Air Conditioning",
+    "Tyres & Wheel Alignment",
+    "Pre-Purchase Inspection",
+    "Other"
+  ]
+}

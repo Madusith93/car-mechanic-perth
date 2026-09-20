@@ -20,42 +20,50 @@ export default function LocalSeoSection() {
   const googleMapsUrl = "https://maps.google.com/?q=6+Aragon+Crt,+Armadale+WA+6112";
 
   return (
-    <section id="areas" className="relative w-full bg-[#0B0F17] text-white py-16 lg:py-24 overflow-hidden border-t border-white/5">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+    <section id="areas" className="relative w-full bg-slate-50 text-slate-900 py-16 sm:py-20 lg:py-28 overflow-hidden border-b border-slate-200/80">
+      
+      {/* VIBRANT AMBIENT GLOW ACCENTS */}
+      <div className="absolute top-1/3 -left-20 z-0 w-80 h-80 bg-[#FF6B00]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 right-0 z-0 w-80 h-80 bg-[#EAB308]/15 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-12 lg:gap-16 items-center">
           
           {/* LEFT COLUMN: LOCAL SEO CONTENT & SUBURBS */}
           <div className="lg:col-span-7 space-y-6 text-left">
             
             {/* SUBTITLE BADGE */}
-            <div className="inline-block text-xs font-bold tracking-[0.2em] text-[#FFC107] uppercase">
-              LOCAL SEO
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EAB308]/15 border border-[#EAB308]/40 text-xs font-black tracking-widest text-slate-900 uppercase shadow-xs">
+              <span className="w-2 h-2 rounded-full bg-[#FF6B00]" />
+              <span>LOCAL SEO</span>
             </div>
 
             {/* MAIN HEADING */}
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight text-white">
+            <h2 className="text-3xl xs:text-4xl sm:text-5xl font-black tracking-tight leading-[1.15] text-slate-900">
               Proudly Serving Armadale & <br />
-              <span className="text-[#FF6B00]">Perth's South-East</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] via-[#F97316] to-[#EAB308]">
+                Perth&apos;s South-East
+              </span>
             </h2>
 
             {/* DESCRIPTION */}
-            <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-              Based on Aragon Crt in Armadale, Car Mechanic Perth is the convenient choice for drivers right across Perth's south-eastern suburbs. If you're searching for a reliable mechanic near you, we've got you covered.
+            <p className="text-slate-700 text-sm sm:text-base leading-relaxed font-medium">
+              Based on Aragon Crt in Armadale, Car Mechanic Perth is the convenient choice for drivers right across Perth&apos;s south-eastern suburbs. If you&apos;re searching for a reliable mechanic near you, we&apos;ve got you covered.
             </p>
 
             {/* SERVICED SUBURBS GRID */}
-            <div className="pt-2">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">
+            <div className="pt-2 space-y-3">
+              <h3 className="text-xs font-black uppercase tracking-wider text-slate-500">
                 Suburbs We Cover Near You:
               </h3>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 {suburbs.map((suburb, idx) => (
                   <div
                     key={idx}
-                    className="bg-white/5 border border-white/10 rounded-lg py-2.5 px-3 flex items-center gap-2 hover:border-[#FF6B00]/50 transition-colors"
+                    className="bg-white border border-slate-200/90 rounded-xl py-2.5 px-3 flex items-center gap-2 shadow-xs hover:border-[#FF6B00] hover:shadow-sm transition-all"
                   >
                     <MapPin className="w-3.5 h-3.5 text-[#FF6B00] shrink-0" />
-                    <span className="text-xs sm:text-sm font-semibold text-slate-200">
+                    <span className="text-xs sm:text-sm font-bold text-slate-800">
                       {suburb}
                     </span>
                   </div>
@@ -64,60 +72,72 @@ export default function LocalSeoSection() {
             </div>
 
             {/* ACTION BUTTONS */}
-            <div className="flex flex-wrap items-center gap-4 pt-4">
+            <div className="flex flex-wrap items-center gap-4 pt-3">
               <a
                 href={googleMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-[#FF6B00] hover:bg-[#e05e00] text-white font-extrabold px-8 py-3.5 rounded-full text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 shadow-lg shadow-[#FF6B00]/25 active:scale-95"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-[#FF6B00] to-[#F97316] hover:from-[#e05e00] hover:to-[#ea580c] text-white font-black px-8 py-4 rounded-xl text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 shadow-xl shadow-[#FF6B00]/30 hover:shadow-2xl hover:shadow-[#FF6B00]/40 hover:-translate-y-0.5 active:translate-y-0"
               >
                 <Navigation className="w-4 h-4" />
-                GET DIRECTIONS
+                <span>Get Directions</span>
               </a>
 
               <Link
                 href="tel:0862449888"
-                className="inline-flex items-center gap-2 bg-transparent border-2 border-white/20 hover:border-[#FFC107] text-white hover:text-[#FFC107] font-extrabold px-8 py-3.5 rounded-full text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 active:scale-95"
+                className="inline-flex items-center gap-2 bg-white hover:bg-slate-100 text-slate-900 font-black px-8 py-4 rounded-xl text-xs sm:text-sm tracking-wider uppercase border-2 border-slate-200 hover:border-[#FF6B00] shadow-sm transition-all duration-300"
               >
-                <PhoneCall className="w-4 h-4" />
-                CALL WORKSHOP
+                <PhoneCall className="w-4 h-4 text-[#FF6B00]" />
+                <span>Call Workshop</span>
               </Link>
             </div>
 
           </div>
 
-          {/* RIGHT COLUMN: LOCATION CARD WITH MAP HIGHLIGHT */}
+          {/* RIGHT COLUMN: LOCATION CARD WITH CAR ILLUSTRATION BG IMAGE */}
           <div className="lg:col-span-5 relative w-full flex justify-center">
             
-            {/* Tilted Orange Background Box */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-[#FF6B00] to-[#FF8800] transform -rotate-3 rounded-2xl shadow-xl shadow-[#FF6B00]/20 translate-x-2 translate-y-2 sm:translate-x-3 sm:translate-y-3" />
+            {/* Tilted Vibrant Orange Gradient Accent Frame */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-[#FF6B00] via-[#F97316] to-[#EAB308] transform -rotate-2 rounded-3xl shadow-xl shadow-[#FF6B00]/20 translate-x-2 translate-y-2 sm:translate-x-3 sm:translate-y-3" />
 
             {/* Location Card Container */}
-            <div className="relative z-10 w-full rounded-xl bg-slate-900 border border-white/10 p-6 sm:p-8 space-y-6 shadow-2xl">
+            <div className="relative z-10 w-full rounded-2xl bg-white border-4 border-white p-6 sm:p-8 space-y-6 shadow-2xl overflow-hidden">
               
-              <div className="w-12 h-12 rounded-xl bg-[#FF6B00]/10 border border-[#FF6B00]/20 flex items-center justify-center">
-                <MapPin className="w-6 h-6 text-[#FF6B00]" />
+              {/* CAR ILLUSTRATION BACKGROUND IMAGE ACCENT */}
+              <img
+                src="https://images.unsplash.com/photo-1679573253629-af0e766c3185?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="Car Illustration"
+                className="absolute -right-8 -bottom-6 w-56 sm:w-64 opacity-15 pointer-events-none object-contain filter grayscale select-none"
+              />
+
+              <div className="flex items-center justify-between relative z-10">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#FF6B00] to-[#EAB308] flex items-center justify-center text-white shadow-md shadow-[#FF6B00]/30">
+                  <MapPin className="w-6 h-6 stroke-[2.5]" />
+                </div>
+                <div className="px-3 py-1 rounded-full bg-[#EAB308]/20 border border-[#EAB308]/40 text-[10px] font-black text-slate-900 tracking-wider uppercase">
+                  Armadale WA
+                </div>
               </div>
 
-              <div className="space-y-2">
-                <span className="text-xs font-bold uppercase tracking-wider text-[#FFC107]">
+              <div className="space-y-1.5 relative z-10">
+                <span className="text-xs font-black uppercase tracking-wider text-[#FF6B00]">
                   WORKSHOP LOCATION
                 </span>
-                <h3 className="text-xl sm:text-2xl font-black text-white">
+                <h3 className="text-2xl font-black text-slate-900">
                   Car Mechanic Perth
                 </h3>
-                <p className="text-slate-300 text-sm leading-relaxed">
+                <p className="text-slate-600 text-sm leading-relaxed font-semibold">
                   {address}
                 </p>
               </div>
 
-              {/* Map Preview Box / Callout */}
-              <div className="bg-white/5 border border-white/10 rounded-lg p-4 space-y-2">
-                <div className="flex items-center justify-between text-xs text-slate-400 font-semibold">
+              {/* Map Preview Callout */}
+              <div className="bg-slate-50/90 backdrop-blur-xs border border-slate-200/90 rounded-xl p-4 space-y-2 relative z-10">
+                <div className="flex items-center justify-between text-xs text-slate-500 font-bold uppercase tracking-wider">
                   <span>LOCATION HIGHLIGHT</span>
-                  <span className="text-[#FF6B00]">Armadale WA</span>
+                  <span className="text-[#FF6B00]">PERTH METRO</span>
                 </div>
-                <p className="text-xs text-slate-300">
+                <p className="text-xs text-slate-700 font-medium leading-relaxed">
                   Easy access off Southwest Highway and Albany Highway for all Perth South-East residents.
                 </p>
               </div>
@@ -126,7 +146,7 @@ export default function LocalSeoSection() {
                 href={googleMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block text-center w-full bg-white/10 hover:bg-[#FF6B00] text-white font-extrabold py-3 rounded-lg text-xs tracking-wider uppercase transition-all duration-300"
+                className="relative z-10 block text-center w-full bg-slate-900 hover:bg-[#FF6B00] text-white font-extrabold py-3.5 rounded-xl text-xs tracking-wider uppercase transition-all duration-300 shadow-md"
               >
                 Open in Google Maps
               </a>

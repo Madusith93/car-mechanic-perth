@@ -94,27 +94,31 @@ export default function LocalSeoSection() {
 
           </div>
 
-          {/* RIGHT COLUMN: LOCATION CARD WITH CAR ILLUSTRATION BG IMAGE */}
+          {/* RIGHT COLUMN: LOCATION CARD WITH VISIBLE CAR BACKGROUND IMAGE */}
           <div className="lg:col-span-5 relative w-full flex justify-center">
             
             {/* Tilted Vibrant Orange Gradient Accent Frame */}
             <div className="absolute inset-0 bg-gradient-to-tr from-[#FF6B00] via-[#F97316] to-[#EAB308] transform -rotate-2 rounded-3xl shadow-xl shadow-[#FF6B00]/20 translate-x-2 translate-y-2 sm:translate-x-3 sm:translate-y-3" />
 
             {/* Location Card Container */}
-            <div className="relative z-10 w-full rounded-2xl bg-white border-4 border-white p-6 sm:p-8 space-y-6 shadow-2xl overflow-hidden">
+            <div className="relative z-10 w-full rounded-2xl bg-white border-4 border-white p-6 sm:p-8 space-y-6 shadow-2xl overflow-hidden flex flex-col justify-between min-h-[380px]">
               
-              {/* CAR ILLUSTRATION BACKGROUND IMAGE ACCENT */}
-              <img
-                src="https://images.unsplash.com/photo-1679573253629-af0e766c3185?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="Car Illustration"
-                className="absolute -right-8 -bottom-6 w-56 sm:w-64 opacity-15 pointer-events-none object-contain filter grayscale select-none"
+              {/* CLEAR BACKGROUND IMAGE WITH SOFT OVERLAY */}
+              <div 
+                className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat transition-transform duration-700 hover:scale-105"
+                style={{
+                  backgroundImage: `url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUscNsNbC_q9mSXtvyZkWh7F1ag7HHwemgPLvHhPzLpcYxatve6-f_Q0w&s=10')`,
+                }}
               />
+              
+              {/* White Gradient Overlay (Makes text easily readable while keeping image sharp) */}
+              <div className="absolute inset-0 z-0 bg-gradient-to-b from-white/95 via-white/90 to-white/95" />
 
               <div className="flex items-center justify-between relative z-10">
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#FF6B00] to-[#EAB308] flex items-center justify-center text-white shadow-md shadow-[#FF6B00]/30">
                   <MapPin className="w-6 h-6 stroke-[2.5]" />
                 </div>
-                <div className="px-3 py-1 rounded-full bg-[#EAB308]/20 border border-[#EAB308]/40 text-[10px] font-black text-slate-900 tracking-wider uppercase">
+                <div className="px-3 py-1 rounded-full bg-[#EAB308]/20 border border-[#EAB308]/50 text-[10px] font-black text-slate-900 tracking-wider uppercase shadow-xs">
                   Armadale WA
                 </div>
               </div>
@@ -126,13 +130,13 @@ export default function LocalSeoSection() {
                 <h3 className="text-2xl font-black text-slate-900">
                   Car Mechanic Perth
                 </h3>
-                <p className="text-slate-600 text-sm leading-relaxed font-semibold">
+                <p className="text-slate-700 text-sm leading-relaxed font-bold">
                   {address}
                 </p>
               </div>
 
               {/* Map Preview Callout */}
-              <div className="bg-slate-50/90 backdrop-blur-xs border border-slate-200/90 rounded-xl p-4 space-y-2 relative z-10">
+              <div className="bg-white/90 backdrop-blur-md border border-slate-200/90 rounded-xl p-4 space-y-1.5 relative z-10 shadow-sm">
                 <div className="flex items-center justify-between text-xs text-slate-500 font-bold uppercase tracking-wider">
                   <span>LOCATION HIGHLIGHT</span>
                   <span className="text-[#FF6B00]">PERTH METRO</span>

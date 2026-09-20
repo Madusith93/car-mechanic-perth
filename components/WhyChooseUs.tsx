@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { CheckCircle2 } from 'lucide-react';
 import { useCms } from '@/context/CmsContext';
+import { CheckCircle2, Wrench } from 'lucide-react';
 
 const DEFAULTS = {
   badge: 'WHAT WE DO',
@@ -48,31 +49,49 @@ export default function ServicesSection() {
   const headingHighlight = cms?.heading_highlight || DEFAULTS.headingHighlight;
   const image = cms?.image || DEFAULTS.image;
   const services = cms?.items?.length ? cms.items : DEFAULTS.services;
+  ];
 
   return (
-    <section id="services" className="relative w-full bg-[#0B0F17] text-white py-12 sm:py-16 lg:py-24 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 items-center">
+    <section id="services" className="relative w-full bg-slate-50 text-slate-900 py-16 sm:py-20 lg:py-28 overflow-hidden border-b border-slate-200/80">
+      
+      {/* VIBRANT AMBIENT GLOW ACCENTS */}
+      <div className="absolute top-1/3 -left-20 z-0 w-80 h-80 bg-[#FF6B00]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 right-0 z-0 w-80 h-80 bg-[#EAB308]/15 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-12 lg:gap-16 items-center">
           
-          {/* LEFT COLUMN: FIXED IMAGE WITH TILTED BACKGROUND BORDER */}
+          {/* LEFT COLUMN: FEATURED IMAGE WITH TILTED VIBRANT ACCENT FRAME */}
           <div className="lg:col-span-5 relative w-full flex justify-center">
             
-            {/* Tilted Orange Background Box */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-[#FF6B00] to-[#FF8800] transform -rotate-3 rounded-2xl shadow-xl shadow-[#FF6B00]/20 translate-x-1.5 translate-y-1.5 sm:translate-x-3 sm:translate-y-3" />
+            {/* Tilted Vibrant Orange Gradient Box */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-[#FF6B00] via-[#F97316] to-[#EAB308] transform -rotate-2 rounded-3xl shadow-xl shadow-[#FF6B00]/20 translate-x-2 translate-y-2 sm:translate-x-3 sm:translate-y-3" />
             
             {/* Main Image Container */}
-            <div className="relative z-10 w-full h-[280px] xs:h-[340px] sm:h-[420px] lg:h-[500px] overflow-hidden rounded-xl bg-slate-900 shadow-2xl border border-white/10">
+            <div className="relative z-10 w-full h-[320px] xs:h-[380px] sm:h-[450px] lg:h-[520px] overflow-hidden rounded-2xl bg-white shadow-2xl border-4 border-white">
               <img
                 src={image}
+                src="https://plus.unsplash.com/premium_photo-1661411128818-08593b7738ba?q=80&w=800&auto=format&fit=crop"
                 alt="Professional Car Mechanic at Work"
-                className="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-500"
+                className="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-700"
               />
+              
+              {/* Floating Badge on Image */}
+              <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md p-4 rounded-xl border border-slate-200/80 shadow-lg flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-[#FF6B00] flex items-center justify-center text-white shrink-0 shadow-md shadow-[#FF6B00]/30">
+                  <Wrench className="w-5 h-5 stroke-[2.5]" />
+                </div>
+                <div>
+                  <h4 className="font-black text-xs text-slate-900 uppercase tracking-wider">Certified Technicians</h4>
+                  <p className="text-[11px] font-semibold text-slate-500">Expert auto care & genuine parts</p>
+                </div>
+              </div>
             </div>
 
           </div>
 
           {/* RIGHT COLUMN: SERVICES CONTENT */}
-          <div className="lg:col-span-7 space-y-4 sm:space-y-6 text-left">
+          <div className="lg:col-span-7 space-y-6 text-left">
             
             {/* SUBTITLE BADGE */}
             <div className="inline-block text-[10px] sm:text-xs font-bold tracking-[0.2em] text-[#FFC107] uppercase">
@@ -83,20 +102,33 @@ export default function ServicesSection() {
             <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight text-white">
               {headingLine1} <br className="hidden xs:block" />
               <span className="text-[#FF6B00]">{headingHighlight}</span>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EAB308]/15 border border-[#EAB308]/40 text-xs font-black tracking-widest text-slate-900 uppercase shadow-xs">
+              <span className="w-2 h-2 rounded-full bg-[#FF6B00]" />
+              <span>WHAT WE DO</span>
+            </div>
+
+            {/* MAIN HEADING */}
+            <h2 className="text-3xl xs:text-4xl sm:text-5xl font-black tracking-tight leading-[1.15] text-slate-900">
+              Complete Car Servicing <br className="hidden xs:block" />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] via-[#F97316] to-[#EAB308]">
+                & Professional Repairs
+              </span>
             </h2>
 
-            {/* SERVICES LIST */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pt-1 sm:pt-2">
+            {/* SERVICES GRID */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
               {services.map((item, idx) => (
                 <div 
                   key={idx} 
-                  className="bg-white/5 border border-white/10 p-3.5 sm:p-4 rounded-xl space-y-1 sm:space-y-1.5 hover:border-[#FF6B00]/50 transition-colors"
+                  className="bg-white border border-slate-200/90 hover:border-[#FF6B00] p-4 sm:p-5 rounded-2xl space-y-2 transition-all duration-300 shadow-sm hover:shadow-md hover:shadow-[#FF6B00]/10 group"
                 >
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#FF6B00] shrink-0" />
-                    <h3 className="font-extrabold text-xs sm:text-sm text-white">{item.title}</h3>
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-6 h-6 rounded-md bg-[#FF6B00]/10 flex items-center justify-center shrink-0 group-hover:bg-[#FF6B00] transition-colors">
+                      <CheckCircle2 className="w-4 h-4 text-[#FF6B00] group-hover:text-white transition-colors" />
+                    </div>
+                    <h3 className="font-extrabold text-sm text-slate-900 group-hover:text-[#FF6B00] transition-colors">{item.title}</h3>
                   </div>
-                  <p className="text-slate-300 text-[11px] sm:text-xs leading-relaxed pl-6">
+                  <p className="text-slate-600 text-xs leading-relaxed pl-8 font-medium">
                     {item.desc}
                   </p>
                 </div>

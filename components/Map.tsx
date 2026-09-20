@@ -2,10 +2,22 @@
 
 import React from 'react';
 import { MapPin, Navigation } from 'lucide-react';
+import { useCms } from '@/context/CmsContext';
+
+const DEFAULTS = {
+  mapEmbedUrl:
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3378.6946026900136!2d116.0125880766297!3d-32.14488837393439!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2a3297a76e7bf72d%3A0x6b09332213b2c9df!2s6%20Aragon%20Crt%2C%20Armadale%20WA%206112%2C%20Australia!5e0!3m2!1sen!2slk!4v1710000000000!5m2!1sen!2slk",
+  address: '6 Aragon Crt, Armadale WA 6112',
+  googleMapsUrl: 'https://maps.google.com/?q=6+Aragon+Crt,+Armadale+WA+6112',
+};
 
 export default function MapSection() {
-  const mapEmbedUrl =
-    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3378.6946026900136!2d116.0125880766297!3d-32.14488837393439!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2a3297a76e7bf72d%3A0x6b09332213b2c9df!2s6%20Aragon%20Crt%2C%20Armadale%20WA%206112%2C%20Australia!5e0!3m2!1sen!2slk!4v1710000000000!5m2!1sen!2slk";
+  const { content } = useCms();
+  const site = content?.site;
+
+  const mapEmbedUrl = site?.map_embed_url || DEFAULTS.mapEmbedUrl;
+  const address = site?.address || DEFAULTS.address;
+  const googleMapsUrl = site?.google_maps_url || DEFAULTS.googleMapsUrl;
 
   return (
     <section className="relative w-full bg-[#0B0F17] text-white py-12 lg:py-16 border-t border-white/5 overflow-hidden">
@@ -27,12 +39,12 @@ export default function MapSection() {
                 </div>
                 <div>
                   <h3 className="text-sm font-extrabold text-white">Find Our Workshop</h3>
-                  <p className="text-xs text-slate-400">6 Aragon Crt, Armadale WA 6112</p>
+                  <p className="text-xs text-slate-400">{address}</p>
                 </div>
               </div>
 
               <a
-                href="https://maps.google.com/?q=6+Aragon+Crt,+Armadale+WA+6112"
+                href={googleMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 bg-[#FF6B00] hover:bg-[#e05e00] text-white font-extrabold px-4 py-2 rounded-lg text-xs tracking-wider uppercase transition-all duration-300"

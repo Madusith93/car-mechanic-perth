@@ -3,17 +3,42 @@
 import React from 'react';
 import Link from 'next/link';
 import { MapPin, Phone, Mail, Wrench } from 'lucide-react';
+import { useCms } from '@/context/CmsContext';
 
-export default function Footer() {
-  const currentYear = new Date().getFullYear();
-
-  const services = [
+const DEFAULTS = {
+  tagline:
+    "Your local Armadale mechanic for logbook servicing, brakes, diagnostics and repairs. Trusted by drivers across Perth's south-east.",
+  services: [
     { title: 'Logbook Servicing', href: '#services' },
     { title: 'Brake Repairs', href: '#services' },
     { title: 'Engine Diagnostics', href: '#services' },
     { title: 'Suspension & Steering', href: '#services' },
     { title: 'Air Conditioning', href: '#services' },
-  ];
+  ],
+  copyrightSuffix: 'Car Mechanic Perth. All rights reserved. Auto repairs & servicing in Armadale, WA.',
+  address: '6 Aragon Crt, Armadale WA 6112',
+  phoneDisplay: '08 6244 9888',
+  phoneTel: '0862449888',
+  email: 'cmechanicperth@gmail.com',
+  businessName: 'Car Mechanic Perth',
+};
+
+export default function Footer() {
+  const { content } = useCms();
+  const site = content?.site;
+  const footer = content?.footer;
+  const currentYear = new Date().getFullYear();
+
+  const tagline = footer?.tagline || DEFAULTS.tagline;
+  const services = footer?.services?.length ? footer.services : DEFAULTS.services;
+  const copyrightSuffix = footer?.copyright_suffix || DEFAULTS.copyrightSuffix;
+  const address = site?.address || DEFAULTS.address;
+  const phoneDisplay = site?.phone_display || DEFAULTS.phoneDisplay;
+  const phoneTel = site?.phone_tel || DEFAULTS.phoneTel;
+  const email = site?.email || DEFAULTS.email;
+  const businessNameParts = (site?.business_name || DEFAULTS.businessName).split(' ');
+  const businessNameLast = businessNameParts.pop();
+  const businessNameRest = businessNameParts.join(' ');
 
   return (
     <footer className="w-full bg-[#070A0F] text-white border-t border-white/10 relative overflow-hidden">
@@ -29,12 +54,12 @@ export default function Footer() {
                 <Wrench className="w-5 h-5" />
               </div>
               <span className="text-xl font-black  tracking-wider text-white">
-                Car Mechanic <span className="text-[#FF6B00]">Perth</span>
+                {businessNameRest} <span className="text-[#FF6B00]">{businessNameLast}</span>
               </span>
             </div>
             
             <p className="text-slate-400 text-xs sm:text-sm leading-relaxed max-w-md">
-              Your local Armadale mechanic for logbook servicing, brakes, diagnostics and repairs. Trusted by drivers across Perth's south-east.
+              {tagline}
             </p>
           </div>
 
@@ -65,18 +90,18 @@ export default function Footer() {
             <ul className="space-y-3 text-xs sm:text-sm text-slate-300">
               <li className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 text-[#FF6B00] shrink-0 mt-0.5" />
-                <span>6 Aragon Crt, Armadale WA 6112</span>
+                <span>{address}</span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-4 h-4 text-[#FF6B00] shrink-0" />
-                <a href="tel:0862449888" className="hover:text-[#FFC107] transition-colors">
-                  08 6244 9888
+                <a href={`tel:${phoneTel}`} className="hover:text-[#FFC107] transition-colors">
+                  {phoneDisplay}
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-[#FF6B00] shrink-0" />
-                <a href="mailto:cmechanicperth@gmail.com" className="hover:text-[#FFC107] transition-colors">
-                  cmechanicperth@gmail.com
+                <a href={`mailto:${email}`} className="hover:text-[#FFC107] transition-colors">
+                  {email}
                 </a>
               </li>
             </ul>
@@ -90,7 +115,7 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left text-xs text-slate-400">
           
           <div>
-            © {currentYear} Car Mechanic Perth. All rights reserved. Auto repairs & servicing in Armadale, WA.
+            © {currentYear} {copyrightSuffix}
           </div>
 
           <div>

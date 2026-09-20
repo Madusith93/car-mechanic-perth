@@ -1,23 +1,74 @@
 'use client';
 
 import React, { useState } from 'react';
-import { MapPin, Phone, Mail, Clock, Send, Calendar } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Send, CheckCircle2 } from 'lucide-react';
+import { useCms } from '@/context/CmsContext';
+import { submitBooking } from '@/lib/cms';
+
+const DEFAULT_SERVICES = [
+  'Logbook Service',
+  'Brake Repair',
+  'Engine Diagnostics',
+  'Suspension & Steering',
+  'Air Conditioning',
+  'Tyres & Wheel Alignment',
+  'Pre-Purchase Inspection',
+  'Other',
+];
+
+const DEFAULTS = {
+  address: '6 Aragon Crt, Armadale WA 6112',
+  phoneDisplay: '08 6244 9888',
+  phoneTel: '0862449888',
+  email: 'cmechanicperth@gmail.com',
+  hours: { weekdays: '7:30am – 5:30pm', saturday: '8:00am – 1:00pm', sunday: 'Closed' },
+};
 
 export default function BookingSection() {
+  const { content } = useCms();
+  const site = content?.site;
+  const serviceOptions = content?.booking?.services?.length ? content.booking.services : DEFAULT_SERVICES;
+
+  const address = site?.address || DEFAULTS.address;
+  const phoneDisplay = site?.phone_display || DEFAULTS.phoneDisplay;
+  const phoneTel = site?.phone_tel || DEFAULTS.phoneTel;
+  const email = site?.email || DEFAULTS.email;
+  const hours = site?.hours || DEFAULTS.hours;
+
   const [formData, setFormData] = useState({
     fullName: '',
     phone: '',
     email: '',
     vehicle: '',
-    service: 'Logbook Service',
+    service: serviceOptions[0] || 'Logbook Service',
     preferredDate: '',
     issue: '',
   });
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle booking submit logic here
-    console.log('Booking Data:', formData);
+    setStatus('submitting');
+    setErrorMessage('');
+
+    const result = await submitBooking(formData);
+
+    if (result.success) {
+      setStatus('success');
+      setFormData({
+        fullName: '',
+        phone: '',
+        email: '',
+        vehicle: '',
+        service: serviceOptions[0] || 'Logbook Service',
+        preferredDate: '',
+        issue: '',
+      });
+    } else {
+      setStatus('error');
+      setErrorMessage(result.error || 'Something went wrong. Please call us instead.');
+    }
   };
 
   return (
@@ -34,8 +85,8 @@ export default function BookingSection() {
           </h2>
           <p className="text-slate-400 text-sm sm:text-base">
             Fill in the form and our team will call to confirm your booking. Prefer to talk? Call us on{' '}
-            <a href="tel:0862449888" className="text-[#FFC107] font-bold hover:underline">
-              08 6244 9888
+            <a href={`tel:${phoneTel}`} className="text-[#FFC107] font-bold hover:underline">
+              {phoneDisplay}
             </a>.
           </p>
         </div>
@@ -44,128 +95,149 @@ export default function BookingSection() {
           
           {/* LEFT COLUMN: BOOKING FORM */}
           <div className="lg:col-span-7 bg-white/5 border border-white/10 p-6 sm:p-8 rounded-2xl shadow-2xl space-y-6">
-            <form onSubmit={handleSubmit} className="space-y-4">
-              
-              {/* FULL NAME & PHONE */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-bold uppercase text-slate-300 mb-1.5">
-                    Full Name <span className="text-[#FF6B00]">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="John Doe"
-                    value={formData.fullName}
-                    onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                    className="w-full bg-slate-900 border border-white/10 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-[#FF6B00] transition-colors"
-                  />
+            {status === 'success' ? (
+              <div className="flex flex-col items-center text-center gap-3 py-10">
+                <div className="w-14 h-14 rounded-full bg-[#FF6B00]/10 border border-[#FF6B00]/30 flex items-center justify-center">
+                  <CheckCircle2 className="w-7 h-7 text-[#FF6B00]" />
                 </div>
-
-                <div>
-                  <label className="block text-xs font-bold uppercase text-slate-300 mb-1.5">
-                    Phone Number <span className="text-[#FF6B00]">*</span>
-                  </label>
-                  <input
-                    type="tel"
-                    required
-                    placeholder="0400 000 000"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full bg-slate-900 border border-white/10 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-[#FF6B00] transition-colors"
-                  />
-                </div>
+                <h3 className="text-xl font-extrabold text-white">Booking Request Sent</h3>
+                <p className="text-slate-400 text-sm max-w-sm">
+                  Thanks — we've got your details and our team will call to confirm shortly.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setStatus('idle')}
+                  className="text-xs font-bold uppercase tracking-wider text-[#FFC107] hover:underline"
+                >
+                  Submit another request
+                </button>
               </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-4">
 
-              {/* EMAIL & VEHICLE */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {status === 'error' && (
+                  <div className="bg-red-500/10 border border-red-500/30 text-red-300 text-xs sm:text-sm rounded-lg px-4 py-3">
+                    {errorMessage}
+                  </div>
+                )}
+
+                {/* FULL NAME & PHONE */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold uppercase text-slate-300 mb-1.5">
+                      Full Name <span className="text-[#FF6B00]">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="John Doe"
+                      value={formData.fullName}
+                      onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                      className="w-full bg-slate-900 border border-white/10 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-[#FF6B00] transition-colors"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold uppercase text-slate-300 mb-1.5">
+                      Phone Number <span className="text-[#FF6B00]">*</span>
+                    </label>
+                    <input
+                      type="tel"
+                      required
+                      placeholder="0400 000 000"
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      className="w-full bg-slate-900 border border-white/10 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-[#FF6B00] transition-colors"
+                    />
+                  </div>
+                </div>
+
+                {/* EMAIL & VEHICLE */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold uppercase text-slate-300 mb-1.5">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      placeholder="john@example.com"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      className="w-full bg-slate-900 border border-white/10 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-[#FF6B00] transition-colors"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold uppercase text-slate-300 mb-1.5">
+                      Vehicle (Make, Model, Year)
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Toyota Camry 2018"
+                      value={formData.vehicle}
+                      onChange={(e) => setFormData({ ...formData, vehicle: e.target.value })}
+                      className="w-full bg-slate-900 border border-white/10 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-[#FF6B00] transition-colors"
+                    />
+                  </div>
+                </div>
+
+                {/* SERVICE REQUIRED & PREFERRED DATE */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold uppercase text-slate-300 mb-1.5">
+                      Service Required <span className="text-[#FF6B00]">*</span>
+                    </label>
+                    <select
+                      required
+                      value={formData.service}
+                      onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                      className="w-full bg-slate-900 border border-white/10 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-[#FF6B00] transition-colors"
+                    >
+                      {serviceOptions.map((option) => (
+                        <option key={option} value={option}>{option}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold uppercase text-slate-300 mb-1.5">
+                      Preferred Date
+                    </label>
+                    <input
+                      type="date"
+                      value={formData.preferredDate}
+                      onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
+                      className="w-full bg-slate-900 border border-white/10 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-[#FF6B00] transition-colors"
+                    />
+                  </div>
+                </div>
+
+                {/* DESCRIBE THE ISSUE */}
                 <div>
                   <label className="block text-xs font-bold uppercase text-slate-300 mb-1.5">
-                    Email
+                    Describe the Issue
                   </label>
-                  <input
-                    type="email"
-                    placeholder="john@example.com"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full bg-slate-900 border border-white/10 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-[#FF6B00] transition-colors"
+                  <textarea
+                    rows={4}
+                    placeholder="Tell us what's happening with your car or any specific requests..."
+                    value={formData.issue}
+                    onChange={(e) => setFormData({ ...formData, issue: e.target.value })}
+                    className="w-full bg-slate-900 border border-white/10 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-[#FF6B00] transition-colors resize-none"
                   />
                 </div>
 
-                <div>
-                  <label className="block text-xs font-bold uppercase text-slate-300 mb-1.5">
-                    Vehicle (Make, Model, Year)
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="e.g. Toyota Camry 2018"
-                    value={formData.vehicle}
-                    onChange={(e) => setFormData({ ...formData, vehicle: e.target.value })}
-                    className="w-full bg-slate-900 border border-white/10 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-[#FF6B00] transition-colors"
-                  />
-                </div>
-              </div>
+                {/* SUBMIT BUTTON */}
+                <button
+                  type="submit"
+                  disabled={status === 'submitting'}
+                  className="w-full bg-[#FF6B00] hover:bg-[#e05e00] disabled:opacity-60 disabled:cursor-not-allowed text-white font-extrabold py-4 rounded-full text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 shadow-lg shadow-[#FF6B00]/25 active:scale-[0.98] flex items-center justify-center gap-2"
+                >
+                  <Send className="w-4 h-4" />
+                  {status === 'submitting' ? 'Sending…' : 'Request Booking'}
+                </button>
 
-              {/* SERVICE REQUIRED & PREFERRED DATE */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-bold uppercase text-slate-300 mb-1.5">
-                    Service Required <span className="text-[#FF6B00]">*</span>
-                  </label>
-                  <select
-                    required
-                    value={formData.service}
-                    onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                    className="w-full bg-slate-900 border border-white/10 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-[#FF6B00] transition-colors"
-                  >
-                    <option value="Logbook Service">Logbook Service</option>
-                    <option value="Brake Repair">Brake Repair</option>
-                    <option value="Engine Diagnostics">Engine Diagnostics</option>
-                    <option value="Suspension & Steering">Suspension & Steering</option>
-                    <option value="Air Conditioning">Air Conditioning</option>
-                    <option value="Tyres & Wheel Alignment">Tyres & Wheel Alignment</option>
-                    <option value="Pre-Purchase Inspection">Pre-Purchase Inspection</option>
-                    <option value="Other">Other</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold uppercase text-slate-300 mb-1.5">
-                    Preferred Date
-                  </label>
-                  <input
-                    type="date"
-                    value={formData.preferredDate}
-                    onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
-                    className="w-full bg-slate-900 border border-white/10 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-[#FF6B00] transition-colors"
-                  />
-                </div>
-              </div>
-
-              {/* DESCRIBE THE ISSUE */}
-              <div>
-                <label className="block text-xs font-bold uppercase text-slate-300 mb-1.5">
-                  Describe the Issue
-                </label>
-                <textarea
-                  rows={4}
-                  placeholder="Tell us what's happening with your car or any specific requests..."
-                  value={formData.issue}
-                  onChange={(e) => setFormData({ ...formData, issue: e.target.value })}
-                  className="w-full bg-slate-900 border border-white/10 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-[#FF6B00] transition-colors resize-none"
-                />
-              </div>
-
-              {/* SUBMIT BUTTON */}
-              <button
-                type="submit"
-                className="w-full bg-[#FF6B00] hover:bg-[#e05e00] text-white font-extrabold py-4 rounded-full text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 shadow-lg shadow-[#FF6B00]/25 active:scale-[0.98] flex items-center justify-center gap-2"
-              >
-                <Send className="w-4 h-4" />
-                REQUEST BOOKING
-              </button>
-
-            </form>
+              </form>
+            )}
           </div>
 
           {/* RIGHT COLUMN: GET IN TOUCH / WORKSHOP DETAILS */}
@@ -197,7 +269,7 @@ export default function BookingSection() {
                   <div>
                     <h4 className="text-xs font-bold uppercase text-slate-400">Workshop Address</h4>
                     <p className="text-slate-200 text-sm font-semibold pt-0.5">
-                      6 Aragon Crt, Armadale WA 6112
+                      {address}
                     </p>
                   </div>
                 </div>
@@ -210,10 +282,10 @@ export default function BookingSection() {
                   <div>
                     <h4 className="text-xs font-bold uppercase text-slate-400">Phone</h4>
                     <a
-                      href="tel:0862449888"
+                      href={`tel:${phoneTel}`}
                       className="text-slate-200 hover:text-[#FFC107] text-sm font-semibold pt-0.5 block transition-colors"
                     >
-                      08 6244 9888
+                      {phoneDisplay}
                     </a>
                   </div>
                 </div>
@@ -226,10 +298,10 @@ export default function BookingSection() {
                   <div>
                     <h4 className="text-xs font-bold uppercase text-slate-400">Email</h4>
                     <a
-                      href="mailto:cmechanicperth@gmail.com"
+                      href={`mailto:${email}`}
                       className="text-slate-200 hover:text-[#FFC107] text-sm font-semibold pt-0.5 block transition-colors"
                     >
-                      cmechanicperth@gmail.com
+                      {email}
                     </a>
                   </div>
                 </div>
@@ -244,15 +316,15 @@ export default function BookingSection() {
                     <div className="text-xs text-slate-300 space-y-1 pt-1">
                       <div className="flex justify-between border-b border-white/5 pb-1">
                         <span>Monday – Friday</span>
-                        <span className="font-semibold text-white">7:30am – 5:30pm</span>
+                        <span className="font-semibold text-white">{hours.weekdays}</span>
                       </div>
                       <div className="flex justify-between border-b border-white/5 pb-1">
                         <span>Saturday</span>
-                        <span className="font-semibold text-white">8:00am – 1:00pm</span>
+                        <span className="font-semibold text-white">{hours.saturday}</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Sunday</span>
-                        <span className="font-semibold text-[#FF6B00]">Closed</span>
+                        <span className="font-semibold text-[#FF6B00]">{hours.sunday}</span>
                       </div>
                     </div>
                   </div>

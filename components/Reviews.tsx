@@ -2,9 +2,14 @@
 
 import React from 'react';
 import { Star, Quote } from 'lucide-react';
+import { useCms } from '@/context/CmsContext';
 
-export default function ReviewsSection() {
-  const reviews = [
+const DEFAULTS = {
+  badge: 'Reviews',
+  headingLine1: 'What Perth Drivers',
+  headingHighlight: 'Say',
+  description: "Real feedback from local drivers across Armadale and Perth's south-eastern suburbs.",
+  reviews: [
     {
       quote:
         'Booked online in minutes and had my Corolla serviced the same day. Honest advice and fair price — my new go-to mechanic in Perth.',
@@ -26,7 +31,18 @@ export default function ReviewsSection() {
       location: 'Gosnells',
       rating: 5,
     },
-  ];
+  ],
+};
+
+export default function ReviewsSection() {
+  const { content } = useCms();
+  const cms = content?.reviews;
+
+  const badge = cms?.badge || DEFAULTS.badge;
+  const headingLine1 = cms?.heading_line1 || DEFAULTS.headingLine1;
+  const headingHighlight = cms?.heading_highlight || DEFAULTS.headingHighlight;
+  const description = cms?.description || DEFAULTS.description;
+  const reviews = cms?.items?.length ? cms.items : DEFAULTS.reviews;
 
   return (
     <section id="reviews" className="relative w-full bg-[#0B0F17] text-white py-16 lg:py-24 overflow-hidden border-t border-white/5">
@@ -35,13 +51,13 @@ export default function ReviewsSection() {
         {/* SECTION HEADER */}
         <div className="text-center space-y-3 max-w-2xl mx-auto mb-12 lg:mb-16">
           <div className="inline-block text-xs font-bold tracking-[0.2em] text-[#FFC107] uppercase ">
-            Reviews
+            {badge}
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight text-white ">
-            What Perth Drivers <span className="text-[#FF6B00]">Say</span>
+            {headingLine1} <span className="text-[#FF6B00]">{headingHighlight}</span>
           </h2>
           <p className="text-slate-400 text-sm sm:text-base">
-            Real feedback from local drivers across Armadale and Perth's south-eastern suburbs.
+            {description}
           </p>
         </div>
 

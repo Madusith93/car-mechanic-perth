@@ -3,9 +3,15 @@
 import React from 'react';
 import Link from 'next/link';
 import { CheckCircle2 } from 'lucide-react';
+import { useCms } from '@/context/CmsContext';
 
-export default function ServicesSection() {
-  const services = [
+const DEFAULTS = {
+  badge: 'WHAT WE DO',
+  headingLine1: 'Complete Car Servicing',
+  headingHighlight: '& Repairs',
+  image:
+    'https://plus.unsplash.com/premium_photo-1661411128818-08593b7738ba?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  services: [
     {
       title: 'Logbook Servicing',
       desc: 'New-car warranty safe logbook servicing for every make and model, stamped and documented.',
@@ -30,7 +36,18 @@ export default function ServicesSection() {
       title: 'Tyres & Alignment',
       desc: 'Tyre fitting, balancing and precision wheel alignment to extend tyre life and improve handling.',
     },
-  ];
+  ],
+};
+
+export default function ServicesSection() {
+  const { content } = useCms();
+  const cms = content?.services;
+
+  const badge = cms?.badge || DEFAULTS.badge;
+  const headingLine1 = cms?.heading_line1 || DEFAULTS.headingLine1;
+  const headingHighlight = cms?.heading_highlight || DEFAULTS.headingHighlight;
+  const image = cms?.image || DEFAULTS.image;
+  const services = cms?.items?.length ? cms.items : DEFAULTS.services;
 
   return (
     <section id="services" className="relative w-full bg-[#0B0F17] text-white py-12 sm:py-16 lg:py-24 overflow-hidden">
@@ -46,7 +63,7 @@ export default function ServicesSection() {
             {/* Main Image Container */}
             <div className="relative z-10 w-full h-[280px] xs:h-[340px] sm:h-[420px] lg:h-[500px] overflow-hidden rounded-xl bg-slate-900 shadow-2xl border border-white/10">
               <img
-                src="https://plus.unsplash.com/premium_photo-1661411128818-08593b7738ba?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                src={image}
                 alt="Professional Car Mechanic at Work"
                 className="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-500"
               />
@@ -59,13 +76,13 @@ export default function ServicesSection() {
             
             {/* SUBTITLE BADGE */}
             <div className="inline-block text-[10px] sm:text-xs font-bold tracking-[0.2em] text-[#FFC107] uppercase">
-              WHAT WE DO
+              {badge}
             </div>
 
             {/* MAIN HEADING (NORMAL TITLE CASE) */}
             <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight text-white">
-              Complete Car Servicing <br className="hidden xs:block" />
-              <span className="text-[#FF6B00]">& Repairs</span>
+              {headingLine1} <br className="hidden xs:block" />
+              <span className="text-[#FF6B00]">{headingHighlight}</span>
             </h2>
 
             {/* SERVICES LIST */}

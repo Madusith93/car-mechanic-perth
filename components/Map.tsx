@@ -35,15 +35,15 @@ export default function MapSection() {
                 </div>
               </div>
 
-              <a
-                href="https://maps.google.com/?q=6+Aragon+Crt,+Armadale+WA+6112"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-[#FF6B00] to-[#F97316] hover:from-[#e05e00] hover:to-[#ea580c] text-white font-black px-4 py-2.5 rounded-xl text-xs tracking-wider uppercase transition-all duration-300 shadow-md shadow-[#FF6B00]/20 active:scale-[0.98]"
-              >
-                <Navigation className="w-3.5 h-3.5" />
-                <span>Open Directions</span>
-              </a>
+             <a
+  href="https://maps.google.com/?q=6+Aragon+Crt,+Armadale+WA+6112"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="inline-flex items-center gap-2 bg-gradient-to-r from-[#FF6B00] to-[#F97316] hover:from-[#e05e00] hover:to-[#ea580c] text-white font-black px-4 py-2.5 rounded-xl text-xs tracking-wider uppercase transition-all duration-300 shadow-xl shadow-[#FF6B00]/40 hover:shadow-2xl hover:shadow-[#FF6B00]/50 hover:-translate-y-0.5 active:translate-y-0"
+>
+  <Navigation className="w-3.5 h-3.5" />
+  <span>Open Directions</span>
+</a>
             </div>
 
             {/* Google Map iFrame */}

@@ -43,12 +43,15 @@ export default function BookingSection() {
             </span>
           </h2>
 
-          <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-medium">
-            Fill in the form and our team will call to confirm your booking. Prefer to talk? Call us on{' '}
-            <a href="tel:0862449888" className="text-[#FF6B00] font-black hover:underline underline-offset-2">
-              08 6244 9888
-            </a>.
-          </p>
+         <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-medium">
+  Fill in the form and our team will call to confirm your booking. Prefer to talk? Call us on{' '}
+  <a 
+    href="tel:0862449888" 
+    className="text-[#FF6B00] font-black hover:underline underline-offset-2 whitespace-nowrap inline-block"
+  >
+    08 6244 9888
+  </a>.
+</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
@@ -167,14 +170,13 @@ export default function BookingSection() {
                 />
               </div>
 
-              {/* SUBMIT BUTTON */}
-              <button
-                type="submit"
-                className="w-full bg-gradient-to-r from-[#FF6B00] to-[#F97316] hover:from-[#e05e00] hover:to-[#ea580c] text-white font-black py-4 rounded-xl text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 shadow-lg shadow-[#FF6B00]/25 active:scale-[0.99] flex items-center justify-center gap-2"
-              >
-                <Send className="w-4 h-4" />
-                REQUEST BOOKING
-              </button>
+            <button
+  type="submit"
+  className="w-full bg-gradient-to-r from-[#FF6B00] to-[#F97316] hover:from-[#e05e00] hover:to-[#ea580c] text-white font-black py-4 rounded-xl text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 shadow-xl shadow-[#FF6B00]/40 hover:shadow-2xl hover:shadow-[#FF6B00]/50 hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2"
+>
+  <Send className="w-4 h-4" />
+  REQUEST BOOKING
+</button>
 
             </form>
           </div>

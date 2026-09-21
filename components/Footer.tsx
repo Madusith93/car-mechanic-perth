@@ -97,17 +97,7 @@ export default function Footer() {
             © {currentYear} Car Mechanic Perth. All rights reserved. Auto repairs & servicing in Armadale, WA.
           </div>
 
-          <div>
-            Designed & Developed by{' '}
-            <a
-              href="https://incarnate.lk/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#EAB308] font-black hover:text-[#FF6B00] transition-colors underline underline-offset-4"
-            >
-              Incarnate
-            </a>
-          </div>
+        
 
         </div>
       </div>

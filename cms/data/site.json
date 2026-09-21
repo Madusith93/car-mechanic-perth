@@ -1,0 +1,15 @@
+{
+  "business_name": "Car Mechanic Perth",
+  "phone_display": "08 6244 9888",
+  "phone_tel": "0862449888",
+  "email": "cmechanicperth@gmail.com",
+  "address": "6 Aragon Crt, Armadale WA 6112",
+  "google_maps_url": "https://maps.google.com/?q=6+Aragon+Crt,+Armadale+WA+6112",
+  "map_embed_url": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3378.6946026900136!2d116.0125880766297!3d-32.14488837393439!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2a3297a76e7bf72d%3A0x6b09332213b2c9df!2s6%20Aragon%20Crt%2C%20Armadale%20WA%206112%2C%20Australia!5e0!3m2!1sen!2slk!4v1710000000000!5m2!1sen!2slk",
+  "hours": {
+    "weekdays": "7:30am \u2013 5:30pm",
+    "saturday": "8:00am \u2013 1:00pm",
+    "sunday": "Closed"
+  },
+  "tagline": "Your local Armadale mechanic for logbook servicing, brakes, diagnostics and repairs. Trusted by drivers across Perth's south-east."
+}

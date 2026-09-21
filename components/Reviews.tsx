@@ -1,10 +1,16 @@
 'use client';
 
 import React from 'react';
+import { Star, Quote } from 'lucide-react';
+import { useCms } from '@/context/CmsContext';
 import { Star, Quote, CheckCircle2 } from 'lucide-react';
 
-export default function ReviewsSection() {
-  const reviews = [
+const DEFAULTS = {
+  badge: 'Reviews',
+  headingLine1: 'What Perth Drivers',
+  headingHighlight: 'Say',
+  description: "Real feedback from local drivers across Armadale and Perth's south-eastern suburbs.",
+  reviews: [
     {
       quote:
         'Booked online in minutes and had my Corolla serviced the same day. Honest advice and fair price — my new go-to mechanic in Perth.',
@@ -26,7 +32,18 @@ export default function ReviewsSection() {
       location: 'Gosnells',
       rating: 5,
     },
-  ];
+  ],
+};
+
+export default function ReviewsSection() {
+  const { content } = useCms();
+  const cms = content?.reviews;
+
+  const badge = cms?.badge || DEFAULTS.badge;
+  const headingLine1 = cms?.heading_line1 || DEFAULTS.headingLine1;
+  const headingHighlight = cms?.heading_highlight || DEFAULTS.headingHighlight;
+  const description = cms?.description || DEFAULTS.description;
+  const reviews = cms?.items?.length ? cms.items : DEFAULTS.reviews;
 
   return (
     <section id="reviews" className="relative w-full bg-slate-50 text-slate-900 py-16 sm:py-20 lg:py-28 overflow-hidden border-b border-slate-200/80">
@@ -38,6 +55,15 @@ export default function ReviewsSection() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         
         {/* SECTION HEADER */}
+        <div className="text-center space-y-3 max-w-2xl mx-auto mb-12 lg:mb-16">
+          <div className="inline-block text-xs font-bold tracking-[0.2em] text-[#FFC107] uppercase ">
+            {badge}
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight text-white ">
+            {headingLine1} <span className="text-[#FF6B00]">{headingHighlight}</span>
+          </h2>
+          <p className="text-slate-400 text-sm sm:text-base">
+            {description}
         <div className="text-center space-y-4 max-w-2xl mx-auto mb-12 lg:mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EAB308]/15 border border-[#EAB308]/40 text-xs font-black tracking-widest text-slate-900 uppercase shadow-xs">
             <span className="w-2 h-2 rounded-full bg-[#FF6B00]" />

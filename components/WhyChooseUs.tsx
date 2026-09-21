@@ -1,10 +1,18 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
+import { CheckCircle2 } from 'lucide-react';
+import { useCms } from '@/context/CmsContext';
 import { CheckCircle2, Wrench } from 'lucide-react';
 
-export default function ServicesSection() {
-  const services = [
+const DEFAULTS = {
+  badge: 'WHAT WE DO',
+  headingLine1: 'Complete Car Servicing',
+  headingHighlight: '& Repairs',
+  image:
+    'https://plus.unsplash.com/premium_photo-1661411128818-08593b7738ba?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  services: [
     {
       title: 'Logbook Servicing',
       desc: 'New-car warranty safe logbook servicing for every make and model, stamped and documented.',
@@ -25,6 +33,22 @@ export default function ServicesSection() {
       title: 'Air Conditioning',
       desc: 'Re-gas, leak detection and full A/C repairs to keep your cabin cool through the Perth summer.',
     },
+    {
+      title: 'Tyres & Alignment',
+      desc: 'Tyre fitting, balancing and precision wheel alignment to extend tyre life and improve handling.',
+    },
+  ],
+};
+
+export default function ServicesSection() {
+  const { content } = useCms();
+  const cms = content?.services;
+
+  const badge = cms?.badge || DEFAULTS.badge;
+  const headingLine1 = cms?.heading_line1 || DEFAULTS.headingLine1;
+  const headingHighlight = cms?.heading_highlight || DEFAULTS.headingHighlight;
+  const image = cms?.image || DEFAULTS.image;
+  const services = cms?.items?.length ? cms.items : DEFAULTS.services;
   ];
 
   return (
@@ -46,6 +70,7 @@ export default function ServicesSection() {
             {/* Main Image Container */}
             <div className="relative z-10 w-full h-[320px] xs:h-[380px] sm:h-[450px] lg:h-[520px] overflow-hidden rounded-2xl bg-white shadow-2xl border-4 border-white">
               <img
+                src={image}
                 src="https://plus.unsplash.com/premium_photo-1661411128818-08593b7738ba?q=80&w=800&auto=format&fit=crop"
                 alt="Professional Car Mechanic at Work"
                 className="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-700"
@@ -69,6 +94,14 @@ export default function ServicesSection() {
           <div className="lg:col-span-7 space-y-6 text-left">
             
             {/* SUBTITLE BADGE */}
+            <div className="inline-block text-[10px] sm:text-xs font-bold tracking-[0.2em] text-[#FFC107] uppercase">
+              {badge}
+            </div>
+
+            {/* MAIN HEADING (NORMAL TITLE CASE) */}
+            <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight text-white">
+              {headingLine1} <br className="hidden xs:block" />
+              <span className="text-[#FF6B00]">{headingHighlight}</span>
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EAB308]/15 border border-[#EAB308]/40 text-xs font-black tracking-widest text-slate-900 uppercase shadow-xs">
               <span className="w-2 h-2 rounded-full bg-[#FF6B00]" />
               <span>WHAT WE DO</span>

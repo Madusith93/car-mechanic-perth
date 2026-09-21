@@ -1,23 +1,75 @@
 'use client';
 
 import React, { useState } from 'react';
+import { MapPin, Phone, Mail, Clock, Send, CheckCircle2 } from 'lucide-react';
+import { useCms } from '@/context/CmsContext';
+import { submitBooking } from '@/lib/cms';
+
+const DEFAULT_SERVICES = [
+  'Logbook Service',
+  'Brake Repair',
+  'Engine Diagnostics',
+  'Suspension & Steering',
+  'Air Conditioning',
+  'Tyres & Wheel Alignment',
+  'Pre-Purchase Inspection',
+  'Other',
+];
+
+const DEFAULTS = {
+  address: '6 Aragon Crt, Armadale WA 6112',
+  phoneDisplay: '08 6244 9888',
+  phoneTel: '0862449888',
+  email: 'cmechanicperth@gmail.com',
+  hours: { weekdays: '7:30am – 5:30pm', saturday: '8:00am – 1:00pm', sunday: 'Closed' },
+};
 import { MapPin, Phone, Mail, Clock, Send } from 'lucide-react';
 
 export default function BookingSection() {
+  const { content } = useCms();
+  const site = content?.site;
+  const serviceOptions = content?.booking?.services?.length ? content.booking.services : DEFAULT_SERVICES;
+
+  const address = site?.address || DEFAULTS.address;
+  const phoneDisplay = site?.phone_display || DEFAULTS.phoneDisplay;
+  const phoneTel = site?.phone_tel || DEFAULTS.phoneTel;
+  const email = site?.email || DEFAULTS.email;
+  const hours = site?.hours || DEFAULTS.hours;
+
   const [formData, setFormData] = useState({
     fullName: '',
     phone: '',
     email: '',
     vehicle: '',
-    service: 'Logbook Service',
+    service: serviceOptions[0] || 'Logbook Service',
     preferredDate: '',
     issue: '',
   });
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle booking submit logic here
-    console.log('Booking Data:', formData);
+    setStatus('submitting');
+    setErrorMessage('');
+
+    const result = await submitBooking(formData);
+
+    if (result.success) {
+      setStatus('success');
+      setFormData({
+        fullName: '',
+        phone: '',
+        email: '',
+        vehicle: '',
+        service: serviceOptions[0] || 'Logbook Service',
+        preferredDate: '',
+        issue: '',
+      });
+    } else {
+      setStatus('error');
+      setErrorMessage(result.error || 'Something went wrong. Please call us instead.');
+    }
   };
 
   return (
@@ -43,20 +95,24 @@ export default function BookingSection() {
             </span>
           </h2>
 
-         <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-medium">
-  Fill in the form and our team will call to confirm your booking. Prefer to talk? Call us on{' '}
-  <a 
-    href="tel:0862449888" 
-    className="text-[#FF6B00] font-black hover:underline underline-offset-2 whitespace-nowrap inline-block"
-  >
-    08 6244 9888
-  </a>.
-</p>
+          <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-medium">
+            Fill in the form and our team will call to confirm your booking. Prefer to talk? Call us on{' '}
+            <a href={`tel:${phoneTel}`} className="text-[#FFC107] font-bold hover:underline">
+              {phoneDisplay}
+            <a href="tel:0862449888" className="text-[#FF6B00] font-black hover:underline underline-offset-2">
+              08 6244 9888
+            </a>.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           
           {/* LEFT COLUMN: BOOKING FORM */}
+          <div className="lg:col-span-7 bg-white/5 border border-white/10 p-6 sm:p-8 rounded-2xl shadow-2xl space-y-6">
+            {status === 'success' ? (
+              <div className="flex flex-col items-center text-center gap-3 py-10">
+                <div className="w-14 h-14 rounded-full bg-[#FF6B00]/10 border border-[#FF6B00]/30 flex items-center justify-center">
+                  <CheckCircle2 className="w-7 h-7 text-[#FF6B00]" />
           <div className="lg:col-span-7 bg-white border border-slate-200/90 p-6 sm:p-8 lg:p-10 rounded-2xl shadow-xl shadow-slate-200/50 space-y-6">
             <form onSubmit={handleSubmit} className="space-y-5">
               
@@ -89,8 +145,144 @@ export default function BookingSection() {
                     className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:border-[#FF6B00] focus:ring-2 focus:ring-[#FF6B00]/20 transition-all font-medium"
                   />
                 </div>
+                <h3 className="text-xl font-extrabold text-white">Booking Request Sent</h3>
+                <p className="text-slate-400 text-sm max-w-sm">
+                  Thanks — we've got your details and our team will call to confirm shortly.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setStatus('idle')}
+                  className="text-xs font-bold uppercase tracking-wider text-[#FFC107] hover:underline"
+                >
+                  Submit another request
+                </button>
               </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-4">
 
+                {status === 'error' && (
+                  <div className="bg-red-500/10 border border-red-500/30 text-red-300 text-xs sm:text-sm rounded-lg px-4 py-3">
+                    {errorMessage}
+                  </div>
+                )}
+
+                {/* FULL NAME & PHONE */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold uppercase text-slate-300 mb-1.5">
+                      Full Name <span className="text-[#FF6B00]">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="John Doe"
+                      value={formData.fullName}
+                      onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                      className="w-full bg-slate-900 border border-white/10 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-[#FF6B00] transition-colors"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold uppercase text-slate-300 mb-1.5">
+                      Phone Number <span className="text-[#FF6B00]">*</span>
+                    </label>
+                    <input
+                      type="tel"
+                      required
+                      placeholder="0400 000 000"
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      className="w-full bg-slate-900 border border-white/10 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-[#FF6B00] transition-colors"
+                    />
+                  </div>
+                </div>
+
+                {/* EMAIL & VEHICLE */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold uppercase text-slate-300 mb-1.5">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      placeholder="john@example.com"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      className="w-full bg-slate-900 border border-white/10 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-[#FF6B00] transition-colors"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold uppercase text-slate-300 mb-1.5">
+                      Vehicle (Make, Model, Year)
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Toyota Camry 2018"
+                      value={formData.vehicle}
+                      onChange={(e) => setFormData({ ...formData, vehicle: e.target.value })}
+                      className="w-full bg-slate-900 border border-white/10 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-[#FF6B00] transition-colors"
+                    />
+                  </div>
+                </div>
+
+                {/* SERVICE REQUIRED & PREFERRED DATE */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold uppercase text-slate-300 mb-1.5">
+                      Service Required <span className="text-[#FF6B00]">*</span>
+                    </label>
+                    <select
+                      required
+                      value={formData.service}
+                      onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                      className="w-full bg-slate-900 border border-white/10 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-[#FF6B00] transition-colors"
+                    >
+                      {serviceOptions.map((option) => (
+                        <option key={option} value={option}>{option}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold uppercase text-slate-300 mb-1.5">
+                      Preferred Date
+                    </label>
+                    <input
+                      type="date"
+                      value={formData.preferredDate}
+                      onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
+                      className="w-full bg-slate-900 border border-white/10 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-[#FF6B00] transition-colors"
+                    />
+                  </div>
+                </div>
+
+                {/* DESCRIBE THE ISSUE */}
+                <div>
+                  <label className="block text-xs font-bold uppercase text-slate-300 mb-1.5">
+                    Describe the Issue
+                  </label>
+                  <textarea
+                    rows={4}
+                    placeholder="Tell us what's happening with your car or any specific requests..."
+                    value={formData.issue}
+                    onChange={(e) => setFormData({ ...formData, issue: e.target.value })}
+                    className="w-full bg-slate-900 border border-white/10 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-[#FF6B00] transition-colors resize-none"
+                  />
+                </div>
+
+                {/* SUBMIT BUTTON */}
+                <button
+                  type="submit"
+                  disabled={status === 'submitting'}
+                  className="w-full bg-[#FF6B00] hover:bg-[#e05e00] disabled:opacity-60 disabled:cursor-not-allowed text-white font-extrabold py-4 rounded-full text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 shadow-lg shadow-[#FF6B00]/25 active:scale-[0.98] flex items-center justify-center gap-2"
+                >
+                  <Send className="w-4 h-4" />
+                  {status === 'submitting' ? 'Sending…' : 'Request Booking'}
+                </button>
+
+              </form>
+            )}
               {/* EMAIL & VEHICLE */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
@@ -170,13 +362,14 @@ export default function BookingSection() {
                 />
               </div>
 
-            <button
-  type="submit"
-  className="w-full bg-gradient-to-r from-[#FF6B00] to-[#F97316] hover:from-[#e05e00] hover:to-[#ea580c] text-white font-black py-4 rounded-xl text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 shadow-xl shadow-[#FF6B00]/40 hover:shadow-2xl hover:shadow-[#FF6B00]/50 hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2"
->
-  <Send className="w-4 h-4" />
-  REQUEST BOOKING
-</button>
+              {/* SUBMIT BUTTON */}
+              <button
+                type="submit"
+                className="w-full bg-gradient-to-r from-[#FF6B00] to-[#F97316] hover:from-[#e05e00] hover:to-[#ea580c] text-white font-black py-4 rounded-xl text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 shadow-lg shadow-[#FF6B00]/25 active:scale-[0.99] flex items-center justify-center gap-2"
+              >
+                <Send className="w-4 h-4" />
+                REQUEST BOOKING
+              </button>
 
             </form>
           </div>
@@ -208,6 +401,9 @@ export default function BookingSection() {
                     <MapPin className="w-5 h-5 text-[#FF6B00]" />
                   </div>
                   <div>
+                    <h4 className="text-xs font-bold uppercase text-slate-400">Workshop Address</h4>
+                    <p className="text-slate-200 text-sm font-semibold pt-0.5">
+                      {address}
                     <h4 className="text-xs font-black uppercase tracking-wider text-slate-400">Workshop Address</h4>
                     <p className="text-slate-800 text-sm font-extrabold pt-0.5">
                       6 Aragon Crt, Armadale WA 6112
@@ -223,10 +419,12 @@ export default function BookingSection() {
                   <div>
                     <h4 className="text-xs font-black uppercase tracking-wider text-slate-400">Phone</h4>
                     <a
+                      href={`tel:${phoneTel}`}
+                      className="text-slate-200 hover:text-[#FFC107] text-sm font-semibold pt-0.5 block transition-colors"
                       href="tel:0862449888"
                       className="text-slate-800 hover:text-[#FF6B00] text-sm font-extrabold pt-0.5 block transition-colors"
                     >
-                      08 6244 9888
+                      {phoneDisplay}
                     </a>
                   </div>
                 </div>
@@ -239,10 +437,12 @@ export default function BookingSection() {
                   <div>
                     <h4 className="text-xs font-black uppercase tracking-wider text-slate-400">Email</h4>
                     <a
+                      href={`mailto:${email}`}
+                      className="text-slate-200 hover:text-[#FFC107] text-sm font-semibold pt-0.5 block transition-colors"
                       href="mailto:cmechanicperth@gmail.com"
                       className="text-slate-800 hover:text-[#FF6B00] text-sm font-extrabold pt-0.5 block transition-colors"
                     >
-                      cmechanicperth@gmail.com
+                      {email}
                     </a>
                   </div>
                 </div>
@@ -252,6 +452,20 @@ export default function BookingSection() {
                   <div className="w-10 h-10 rounded-xl bg-[#FF6B00]/10 border border-[#FF6B00]/20 flex items-center justify-center shrink-0">
                     <Clock className="w-5 h-5 text-[#FF6B00]" />
                   </div>
+                  <div className="space-y-1 w-full">
+                    <h4 className="text-xs font-bold uppercase text-slate-400">Opening Hours</h4>
+                    <div className="text-xs text-slate-300 space-y-1 pt-1">
+                      <div className="flex justify-between border-b border-white/5 pb-1">
+                        <span>Monday – Friday</span>
+                        <span className="font-semibold text-white">{hours.weekdays}</span>
+                      </div>
+                      <div className="flex justify-between border-b border-white/5 pb-1">
+                        <span>Saturday</span>
+                        <span className="font-semibold text-white">{hours.saturday}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Sunday</span>
+                        <span className="font-semibold text-[#FF6B00]">{hours.sunday}</span>
                   <div className="space-y-2 w-full">
                     <h4 className="text-xs font-black uppercase tracking-wider text-slate-400">Opening Hours</h4>
                     <div className="text-xs text-slate-600 space-y-1.5 pt-1">

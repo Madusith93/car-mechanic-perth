@@ -1,0 +1,11 @@
+{
+  "badge": "Reviews",
+  "heading_line1": "What Perth Drivers",
+  "heading_highlight": "Say",
+  "description": "Real feedback from local drivers across Armadale and Perth's south-eastern suburbs.",
+  "items": [
+    { "quote": "Booked online in minutes and had my Corolla serviced the same day. Honest advice and fair price \u2014 my new go-to mechanic in Perth.", "author": "Sarah M.", "location": "Armadale", "rating": 5 },
+    { "quote": "Sorted a brake issue three other places couldn't diagnose. Clear explanation, no upsell. Highly recommend.", "author": "Dave R.", "location": "Kelmscott", "rating": 5 },
+    { "quote": "Friendly team, spotless workshop and my air con is icy again. Great local mechanic, thanks guys.", "author": "Priya K.", "location": "Gosnells", "rating": 5 }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "badge": "WHAT WE DO",
+  "heading_line1": "Complete Car Servicing",
+  "heading_highlight": "& Repairs",
+  "image": "https://plus.unsplash.com/premium_photo-1661411128818-08593b7738ba?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "items": [
+    { "title": "Logbook Servicing", "desc": "New-car warranty safe logbook servicing for every make and model, stamped and documented." },
+    { "title": "Brake Repairs", "desc": "Pads, rotors, calipers and fluid flushes. Squealing or spongy brakes fixed fast and safely." },
+    { "title": "Engine Diagnostics", "desc": "Check-engine light on? Our scan tools pinpoint faults so you only pay for what's needed." },
+    { "title": "Suspension & Steering", "desc": "Shocks, struts, bushes and steering components for a smooth, controlled ride." },
+    { "title": "Air Conditioning", "desc": "Re-gas, leak detection and full A/C repairs to keep your cabin cool through the Perth summer." },
+    { "title": "Tyres & Alignment", "desc": "Tyre fitting, balancing and precision wheel alignment to extend tyre life and improve handling." }
+  ]
+}

@@ -2,31 +2,52 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { DollarSign, Car, ShieldCheck, Clock } from 'lucide-react';
+import { useCms } from '@/context/CmsContext';
 import { DollarSign, Car, ShieldCheck, Clock, Award, ChevronRight } from 'lucide-react';
 
-export default function WhyChooseUsSection() {
-  const whyReasons = [
+// Icons stay fixed to this order in the CMS — content editors can only edit
+// the title/desc text and count on the same four icons.
+const ICONS = [DollarSign, Car, ShieldCheck, Clock];
+
+const DEFAULTS = {
+  badge: 'WHY CHOOSE US',
+  headingLine1: 'Workshop-Quality Care,',
+  headingHighlight: 'Local Prices',
+  image:
+    'https://images.unsplash.com/photo-1727893304219-063d142ce6f3?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  ctaText: 'BOOK YOUR SERVICE',
+  reasons: [
     {
-      icon: DollarSign,
       title: 'Honest & Upfront Pricing',
       desc: 'No surprises. We quote before we start and only carry out approved work.',
     },
     {
-      icon: Car,
       title: 'All Makes & Models',
       desc: 'European, Japanese, Australian and 4WDs — our technicians work across every marque.',
     },
     {
-      icon: ShieldCheck,
       title: 'Warranty Protected',
       desc: 'Logbook servicing that keeps your new-car warranty fully intact.',
     },
     {
-      icon: Clock,
       title: 'Fast Turnaround',
       desc: "Most services completed same day so you're back on the road without the wait.",
     },
-  ];
+  ],
+};
+
+export default function WhyChooseUsSection() {
+  const { content } = useCms();
+  const cms = content?.whyUs;
+
+  const badge = cms?.badge || DEFAULTS.badge;
+  const headingLine1 = cms?.heading_line1 || DEFAULTS.headingLine1;
+  const headingHighlight = cms?.heading_highlight || DEFAULTS.headingHighlight;
+  const image = cms?.image || DEFAULTS.image;
+  const ctaText = cms?.cta_text || DEFAULTS.ctaText;
+  const items = cms?.items?.length ? cms.items : DEFAULTS.reasons;
+  const whyReasons = items.map((item, idx) => ({ ...item, icon: ICONS[idx] || ICONS[ICONS.length - 1] }));
 
   return (
     <section id="why" className="relative w-full bg-white text-slate-900 py-16 sm:py-20 lg:py-28 overflow-hidden border-b border-slate-200/80">
@@ -42,6 +63,14 @@ export default function WhyChooseUsSection() {
           <div className="lg:col-span-7 space-y-6 text-left order-2 lg:order-1">
             
             {/* SUBTITLE BADGE */}
+            <div className="inline-block text-xs font-bold tracking-[0.2em] text-[#FFC107] uppercase">
+              {badge}
+            </div>
+
+            {/* MAIN HEADING */}
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight text-white">
+              {headingLine1} <br />
+              <span className="text-[#FF6B00]">{headingHighlight}</span>
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EAB308]/15 border border-[#EAB308]/40 text-xs font-black tracking-widest text-slate-900 uppercase shadow-xs">
               <span className="w-2 h-2 rounded-full bg-[#FF6B00]" />
               <span>WHY CHOOSE US</span>
@@ -82,6 +111,7 @@ export default function WhyChooseUsSection() {
                 href="#contact"
                 className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#FF6B00] to-[#F97316] hover:from-[#e05e00] hover:to-[#ea580c] text-white font-black px-9 py-4 rounded-xl text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 shadow-xl shadow-[#FF6B00]/30 hover:shadow-2xl hover:shadow-[#FF6B00]/40 hover:-translate-y-0.5 active:translate-y-0"
               >
+                {ctaText}
                 <span>Book Your Service</span>
                 <ChevronRight className="w-4 h-4" />
               </Link>
@@ -98,6 +128,7 @@ export default function WhyChooseUsSection() {
             {/* Image Box */}
             <div className="relative z-10 w-full h-[320px] xs:h-[380px] sm:h-[450px] lg:h-[520px] overflow-hidden rounded-2xl bg-white shadow-2xl border-4 border-white">
               <img
+                src={image}
                 src="https://images.unsplash.com/photo-1727893304219-063d142ce6f3?q=80&w=800&auto=format&fit=crop"
                 alt="Modern Automotive Workshop Care"
                 className="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-700"

@@ -1,0 +1,11 @@
+{
+  "tagline": "Your local Armadale mechanic for logbook servicing, brakes, diagnostics and repairs. Trusted by drivers across Perth's south-east.",
+  "services": [
+    { "title": "Logbook Servicing", "href": "#services" },
+    { "title": "Brake Repairs", "href": "#services" },
+    { "title": "Engine Diagnostics", "href": "#services" },
+    { "title": "Suspension & Steering", "href": "#services" },
+    { "title": "Air Conditioning", "href": "#services" }
+  ],
+  "copyright_suffix": "Car Mechanic Perth. All rights reserved. Auto repairs & servicing in Armadale, WA."
+}

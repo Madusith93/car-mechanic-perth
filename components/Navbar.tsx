@@ -3,12 +3,14 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { Menu, X, Wrench, Phone } from 'lucide-react';
+import { useCms } from '@/context/CmsContext';
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { content } = useCms();
 
-  const phoneNumber = "08 6244 9888";
-  const telLink = "tel:0862449888";
+  const phoneNumber = content?.site?.phone_display || "08 6244 9888";
+  const telLink = `tel:${content?.site?.phone_tel || "0862449888"}`;
 
   const navLinks = [
     { name: 'SERVICES', href: '#services' },

@@ -1,0 +1,13 @@
+{
+  "badge": "WHY CHOOSE US",
+  "heading_line1": "Workshop-Quality Care,",
+  "heading_highlight": "Local Prices",
+  "image": "https://images.unsplash.com/photo-1727893304219-063d142ce6f3?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "cta_text": "BOOK YOUR SERVICE",
+  "items": [
+    { "title": "Honest & Upfront Pricing", "desc": "No surprises. We quote before we start and only carry out approved work." },
+    { "title": "All Makes & Models", "desc": "European, Japanese, Australian and 4WDs \u2014 our technicians work across every marque." },
+    { "title": "Warranty Protected", "desc": "Logbook servicing that keeps your new-car warranty fully intact." },
+    { "title": "Fast Turnaround", "desc": "Most services completed same day so you're back on the road without the wait." }
+  ]
+}

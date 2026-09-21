@@ -2,10 +2,22 @@
 
 import React from 'react';
 import { MapPin, Navigation } from 'lucide-react';
+import { useCms } from '@/context/CmsContext';
+
+const DEFAULTS = {
+  mapEmbedUrl:
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3378.6946026900136!2d116.0125880766297!3d-32.14488837393439!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2a3297a76e7bf72d%3A0x6b09332213b2c9df!2s6%20Aragon%20Crt%2C%20Armadale%20WA%206112%2C%20Australia!5e0!3m2!1sen!2slk!4v1710000000000!5m2!1sen!2slk",
+  address: '6 Aragon Crt, Armadale WA 6112',
+  googleMapsUrl: 'https://maps.google.com/?q=6+Aragon+Crt,+Armadale+WA+6112',
+};
 
 export default function MapSection() {
-  const mapEmbedUrl =
-    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3378.6946026900136!2d116.0125880766297!3d-32.14488837393439!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2a3297a76e7bf72d%3A0x6b09332213b2c9df!2s6%20Aragon%20Crt%2C%20Armadale%20WA%206112%2C%20Australia!5e0!3m2!1sen!2slk!4v1710000000000!5m2!1sen!2slk";
+  const { content } = useCms();
+  const site = content?.site;
+
+  const mapEmbedUrl = site?.map_embed_url || DEFAULTS.mapEmbedUrl;
+  const address = site?.address || DEFAULTS.address;
+  const googleMapsUrl = site?.google_maps_url || DEFAULTS.googleMapsUrl;
 
   return (
     <section className="relative w-full bg-slate-50 text-slate-900 py-12 lg:py-16 border-b border-slate-200/80 overflow-hidden">
@@ -30,20 +42,22 @@ export default function MapSection() {
                   <MapPin className="w-5 h-5 text-[#FF6B00]" />
                 </div>
                 <div>
+                  <h3 className="text-sm font-extrabold text-white">Find Our Workshop</h3>
+                  <p className="text-xs text-slate-400">{address}</p>
                   <h3 className="text-sm font-black text-slate-900 uppercase tracking-tight">Find Our Workshop</h3>
                   <p className="text-xs font-semibold text-slate-500">6 Aragon Crt, Armadale WA 6112</p>
                 </div>
               </div>
 
-             <a
-  href="https://maps.google.com/?q=6+Aragon+Crt,+Armadale+WA+6112"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="inline-flex items-center gap-2 bg-gradient-to-r from-[#FF6B00] to-[#F97316] hover:from-[#e05e00] hover:to-[#ea580c] text-white font-black px-4 py-2.5 rounded-xl text-xs tracking-wider uppercase transition-all duration-300 shadow-xl shadow-[#FF6B00]/40 hover:shadow-2xl hover:shadow-[#FF6B00]/50 hover:-translate-y-0.5 active:translate-y-0"
->
-  <Navigation className="w-3.5 h-3.5" />
-  <span>Open Directions</span>
-</a>
+              <a
+                href={googleMapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-[#FF6B00] to-[#F97316] hover:from-[#e05e00] hover:to-[#ea580c] text-white font-black px-4 py-2.5 rounded-xl text-xs tracking-wider uppercase transition-all duration-300 shadow-md shadow-[#FF6B00]/20 active:scale-[0.98]"
+              >
+                <Navigation className="w-3.5 h-3.5" />
+                <span>Open Directions</span>
+              </a>
             </div>
 
             {/* Google Map iFrame */}

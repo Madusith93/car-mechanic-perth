@@ -1,9 +1,8 @@
 'use client';
 
 import React from 'react';
-import { Star, Quote } from 'lucide-react';
-import { useCms } from '@/context/CmsContext';
 import { Star, Quote, CheckCircle2 } from 'lucide-react';
+import { useCms } from '@/context/CmsContext';
 
 const DEFAULTS = {
   badge: 'Reviews',
@@ -55,30 +54,21 @@ export default function ReviewsSection() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         
         {/* SECTION HEADER */}
-        <div className="text-center space-y-3 max-w-2xl mx-auto mb-12 lg:mb-16">
-          <div className="inline-block text-xs font-bold tracking-[0.2em] text-[#FFC107] uppercase ">
-            {badge}
-          </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight text-white ">
-            {headingLine1} <span className="text-[#FF6B00]">{headingHighlight}</span>
-          </h2>
-          <p className="text-slate-400 text-sm sm:text-base">
-            {description}
         <div className="text-center space-y-4 max-w-2xl mx-auto mb-12 lg:mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EAB308]/15 border border-[#EAB308]/40 text-xs font-black tracking-widest text-slate-900 uppercase shadow-xs">
             <span className="w-2 h-2 rounded-full bg-[#FF6B00]" />
-            <span>REVIEWS</span>
+            <span>{badge}</span>
           </div>
 
           <h2 className="text-3xl xs:text-4xl sm:text-5xl font-black tracking-tight leading-[1.15] text-slate-900">
-            What Perth Drivers{' '}
+            {headingLine1}{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] via-[#F97316] to-[#EAB308]">
-              Say
+              {headingHighlight}
             </span>
           </h2>
 
           <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-medium">
-            Real feedback from local drivers across Armadale and Perth&apos;s south-eastern suburbs.
+            {description}
           </p>
         </div>
 

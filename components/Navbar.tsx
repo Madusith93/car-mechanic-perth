@@ -118,13 +118,12 @@ export default function Navbar() {
           ))}
 
           <div className="pt-2">
-            <Link
-              href="#contact"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="block w-full text-center bg-gradient-to-r from-from-[#FF6B00] to-[#F97316] hover:from-[#e05e00] hover:to-[#ea580c] text-white font-black py-3.5 rounded-xl uppercase tracking-wider transition-all duration-300 shadow-lg shadow-[#FF6B00]/30 active:scale-[0.99]"
-            >
-              BOOK NOW
-            </Link>
+           <Link
+            href="#contact"
+            className="bg-gradient-to-r from-[#FF6B00] to-[#F97316] hover:from-[#e05e00] hover:to-[#ea580c] text-white font-black px-6 py-2.5 rounded-xl text-xs uppercase tracking-wider transition-all duration-300 shadow-lg shadow-[#FF6B00]/30 hover:shadow-xl hover:shadow-[#FF6B00]/40 hover:-translate-y-0.5 active:translate-y-0"
+          >
+            BOOK NOW
+          </Link>
           </div>
         </div>
       )}

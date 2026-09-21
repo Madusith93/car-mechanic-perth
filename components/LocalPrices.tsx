@@ -2,12 +2,10 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { DollarSign, Car, ShieldCheck, Clock } from 'lucide-react';
-import { useCms } from '@/context/CmsContext';
 import { DollarSign, Car, ShieldCheck, Clock, Award, ChevronRight } from 'lucide-react';
+import { useCms } from '@/context/CmsContext';
 
-// Icons stay fixed to this order in the CMS — content editors can only edit
-// the title/desc text and count on the same four icons.
+// Fixed icon mapping array matching CMS feature items order
 const ICONS = [DollarSign, Car, ShieldCheck, Clock];
 
 const DEFAULTS = {
@@ -15,7 +13,7 @@ const DEFAULTS = {
   headingLine1: 'Workshop-Quality Care,',
   headingHighlight: 'Local Prices',
   image:
-    'https://images.unsplash.com/photo-1727893304219-063d142ce6f3?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'https://images.unsplash.com/photo-1727893304219-063d142ce6f3?q=80&w=800&auto=format&fit=crop',
   ctaText: 'BOOK YOUR SERVICE',
   reasons: [
     {
@@ -47,7 +45,10 @@ export default function WhyChooseUsSection() {
   const image = cms?.image || DEFAULTS.image;
   const ctaText = cms?.cta_text || DEFAULTS.ctaText;
   const items = cms?.items?.length ? cms.items : DEFAULTS.reasons;
-  const whyReasons = items.map((item, idx) => ({ ...item, icon: ICONS[idx] || ICONS[ICONS.length - 1] }));
+  const whyReasons = items.map((item, idx) => ({
+    ...item,
+    icon: ICONS[idx] || ICONS[ICONS.length - 1],
+  }));
 
   return (
     <section id="why" className="relative w-full bg-white text-slate-900 py-16 sm:py-20 lg:py-28 overflow-hidden border-b border-slate-200/80">
@@ -63,24 +64,16 @@ export default function WhyChooseUsSection() {
           <div className="lg:col-span-7 space-y-6 text-left order-2 lg:order-1">
             
             {/* SUBTITLE BADGE */}
-            <div className="inline-block text-xs font-bold tracking-[0.2em] text-[#FFC107] uppercase">
-              {badge}
-            </div>
-
-            {/* MAIN HEADING */}
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight text-white">
-              {headingLine1} <br />
-              <span className="text-[#FF6B00]">{headingHighlight}</span>
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EAB308]/15 border border-[#EAB308]/40 text-xs font-black tracking-widest text-slate-900 uppercase shadow-xs">
               <span className="w-2 h-2 rounded-full bg-[#FF6B00]" />
-              <span>WHY CHOOSE US</span>
+              <span>{badge}</span>
             </div>
 
             {/* MAIN HEADING */}
             <h2 className="text-3xl xs:text-4xl sm:text-5xl font-black tracking-tight leading-[1.15] text-slate-900">
-              Workshop-Quality Care, <br className="hidden xs:block" />
+              {headingLine1} <br className="hidden xs:block" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] via-[#F97316] to-[#EAB308]">
-                Local Prices
+                {headingHighlight}
               </span>
             </h2>
 
@@ -111,8 +104,7 @@ export default function WhyChooseUsSection() {
                 href="#contact"
                 className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#FF6B00] to-[#F97316] hover:from-[#e05e00] hover:to-[#ea580c] text-white font-black px-9 py-4 rounded-xl text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 shadow-xl shadow-[#FF6B00]/30 hover:shadow-2xl hover:shadow-[#FF6B00]/40 hover:-translate-y-0.5 active:translate-y-0"
               >
-                {ctaText}
-                <span>Book Your Service</span>
+                <span>{ctaText}</span>
                 <ChevronRight className="w-4 h-4" />
               </Link>
             </div>
@@ -129,7 +121,6 @@ export default function WhyChooseUsSection() {
             <div className="relative z-10 w-full h-[320px] xs:h-[380px] sm:h-[450px] lg:h-[520px] overflow-hidden rounded-2xl bg-white shadow-2xl border-4 border-white">
               <img
                 src={image}
-                src="https://images.unsplash.com/photo-1727893304219-063d142ce6f3?q=80&w=800&auto=format&fit=crop"
                 alt="Modern Automotive Workshop Care"
                 className="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-700"
               />

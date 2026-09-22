@@ -7,9 +7,9 @@ import { useCms } from '@/context/CmsContext';
 const DEFAULTS = {
   badge: 'WHAT WE DO',
   headingLine1: 'Complete Car Servicing',
-  headingHighlight: '& Repairs',
+  headingHighlight: '& Professional Repairs',
   image:
-    'https://plus.unsplash.com/premium_photo-1661411128818-08593b7738ba?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'https://plus.unsplash.com/premium_photo-1661411128818-08593b7738ba?q=80&w=800&auto=format&fit=crop',
   services: [
     { title: 'Logbook Servicing', desc: 'New-car warranty safe logbook servicing for every make and model, stamped and documented.' },
     { title: 'Brake Repairs', desc: 'Pads, rotors, calipers and fluid flushes. Squealing or spongy brakes fixed fast and safely.' },
@@ -17,6 +17,26 @@ const DEFAULTS = {
     { title: 'Suspension & Steering', desc: 'Shocks, struts, bushes and steering components for a smooth, controlled ride.' },
     { title: 'Air Conditioning', desc: 'Re-gas, leak detection and full A/C repairs to keep your cabin cool through the Perth summer.' },
     { title: 'Tyres & Alignment', desc: 'Tyre fitting, balancing and precision wheel alignment to extend tyre life and improve handling.' },
+    {
+      title: 'Logbook Servicing',
+      desc: 'New-car warranty safe logbook servicing for every make and model, stamped and documented.',
+    },
+    {
+      title: 'Brake Repairs',
+      desc: 'Pads, rotors, calipers and fluid flushes. Squealing or spongy brakes fixed fast and safely.',
+    },
+    {
+      title: 'Engine Diagnostics',
+      desc: "Check-engine light on? Our scan tools pinpoint faults so you only pay for what's needed.",
+    },
+    {
+      title: 'Suspension & Steering',
+      desc: 'Shocks, struts, bushes and steering components for a smooth, controlled ride.',
+    },
+    {
+      title: 'Air Conditioning',
+      desc: 'Re-gas, leak detection and full A/C repairs to keep your cabin cool through the Perth summer.',
+    },
   ],
 };
 
@@ -66,6 +86,8 @@ export default function ServicesSection() {
           {/* RIGHT COLUMN: SERVICES CONTENT */}
           <div className="lg:col-span-7 space-y-6 text-left">
 
+            
+            {/* SUBTITLE BADGE */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EAB308]/15 border border-[#EAB308]/40 text-xs font-black tracking-widest text-slate-900 uppercase shadow-xs">
               <span className="w-2 h-2 rounded-full bg-[#FF6B00]" />
               <span>{badge}</span>

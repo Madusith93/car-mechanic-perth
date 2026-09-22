@@ -65,10 +65,10 @@ export default function Navbar() {
             <span>{phoneNumber}</span>
           </a>
 
-          {/* BOOK NOW Button with Vibrant Tangerine Orange Background */}
+          {/* BOOK NOW Button with Primary Brand Gradient */}
           <Link
             href="#contact"
-            className="bg-[#FF6B00] hover:bg-[#e05e00] text-white font-black px-6 py-2.5 rounded-md text-xs uppercase tracking-wider transition-all duration-300 shadow-lg shadow-[#FF6B00]/25 hover:shadow-xl hover:shadow-[#FF6B00]/30 active:scale-95"
+            className="bg-gradient-to-r from-[#FF6B00] to-[#F97316] hover:from-[#e05e00] hover:to-[#ea580c] text-white font-black px-6 py-2.5 rounded-xl text-xs uppercase tracking-wider transition-all duration-300 shadow-lg shadow-[#FF6B00]/30 hover:shadow-xl hover:shadow-[#FF6B00]/40 hover:-translate-y-0.5 active:translate-y-0"
           >
             BOOK NOW
           </Link>
@@ -118,13 +118,12 @@ export default function Navbar() {
           ))}
 
           <div className="pt-2">
-            <Link
-              href="#contact"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="block w-full text-center bg-[#FF6B00] hover:bg-[#e05e00] text-white font-black py-3 rounded-md uppercase tracking-wider shadow-md shadow-[#FF6B00]/20"
-            >
-              BOOK NOW
-            </Link>
+           <Link
+            href="#contact"
+            className="bg-gradient-to-r from-[#FF6B00] to-[#F97316] hover:from-[#e05e00] hover:to-[#ea580c] text-white font-black px-6 py-2.5 rounded-xl text-xs uppercase tracking-wider transition-all duration-300 shadow-lg shadow-[#FF6B00]/30 hover:shadow-xl hover:shadow-[#FF6B00]/40 hover:-translate-y-0.5 active:translate-y-0"
+          >
+            BOOK NOW
+          </Link>
           </div>
         </div>
       )}

@@ -12,7 +12,7 @@ const DEFAULTS = {
   headingLine1: "Perth's Trusted",
   headingHighlight: 'Car Mechanic',
   description:
-    "Honest, affordable auto repairs and logbook servicing in Armadale. From brakes and diagnostics to air conditioning — we keep Perth drivers safely on the road.",
+    'Honest, affordable auto repairs and logbook servicing in Armadale. From brakes and diagnostics to air conditioning — we keep Perth drivers safely on the road.',
   ctaText: 'Get An Appointment',
   backgroundImage:
     'https://autosense.lk/wp-content/uploads/2024/02/young-mechanic-with-diagnostic-tool-analyzing-car-engine-problem-auto-repair-shop.jpg',
@@ -30,7 +30,7 @@ export default function Hero() {
   const ctaText = hero?.cta_text || DEFAULTS.ctaText;
   const backgroundImage = hero?.background_image || DEFAULTS.backgroundImage;
   const featureTexts = hero?.features?.length ? hero.features : DEFAULTS.features;
-  const features = featureTexts.map((title, idx) => ({
+  const features = featureTexts.map((title: string, idx: number) => ({
     title,
     icon: FEATURE_ICONS[idx % FEATURE_ICONS.length],
   }));
@@ -38,20 +38,20 @@ export default function Hero() {
   return (
     <section className="relative w-full min-h-[calc(100vh-80px)] flex flex-col justify-between overflow-hidden border-b border-slate-200 bg-slate-100">
 
-      {/* 1. FULL BACKGROUND IMAGE */}
+      {/* 1. FULL BACKGROUND IMAGE WITH ENHANCED COLOR & CONTRAST */}
       <div
-        className="absolute inset-0 z-0 bg-cover bg-center sm:bg-right-top lg:bg-center bg-no-repeat transition-all duration-500 transform scale-100"
+        className="absolute inset-0 z-0 bg-cover bg-center sm:bg-right-top lg:bg-center bg-no-repeat transition-all duration-500 transform scale-100 contrast-110 saturate-125"
         style={{ backgroundImage: `url('${backgroundImage}')` }}
       />
 
-      {/* 2. GRADIENT OVERLAY */}
-      <div className="absolute inset-0 z-0 bg-gradient-to-b sm:bg-gradient-to-r from-white via-white/85 sm:via-white/85 to-white/40 sm:to-white/30" />
+      {/* 2. GRADIENT OVERLAY (Adjusted to reveal more background) */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-b sm:bg-gradient-to-r from-white/95 via-white/70 sm:via-white/65 to-white/20 sm:to-transparent" />
 
       {/* VIBRANT GLOW ACCENTS */}
       <div className="absolute top-1/4 left-5 sm:left-10 z-0 w-64 sm:w-[500px] h-64 sm:h-[500px] bg-[#FF6B00]/25 rounded-full blur-[80px] sm:blur-[120px] pointer-events-none" />
       <div className="absolute -bottom-20 right-5 sm:right-1/4 z-0 w-64 sm:w-[450px] h-64 sm:h-[450px] bg-[#EAB308]/25 rounded-full blur-[80px] sm:blur-[100px] pointer-events-none" />
 
-      {/* 3. HERO CONTENT */}
+      {/* 3. HERO CONTENT AREA */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-12 sm:py-24 my-auto w-full">
         <div className="max-w-2xl space-y-6 sm:space-y-8">
 
@@ -72,7 +72,7 @@ export default function Hero() {
           </h1>
 
           {/* DESCRIPTION */}
-          <p className="text-slate-800 text-sm sm:text-base lg:text-lg leading-relaxed font-bold max-w-xl bg-white/60 backdrop-blur-xs p-3.5 sm:p-3 rounded-xl border border-white/80 shadow-xs">
+          <p className="text-slate-800 text-sm sm:text-base lg:text-lg leading-relaxed font-bold max-w-xl bg-white/75 backdrop-blur-xs p-3.5 sm:p-4 rounded-xl border border-white/80 shadow-xs">
             {description}
           </p>
 

@@ -34,6 +34,8 @@ export default function ReviewsSection() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
 
+        
+        {/* SECTION HEADER */}
         <div className="text-center space-y-4 max-w-2xl mx-auto mb-12 lg:mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EAB308]/15 border border-[#EAB308]/40 text-xs font-black tracking-widest text-slate-900 uppercase shadow-xs">
             <span className="w-2 h-2 rounded-full bg-[#FF6B00]" />

@@ -6,7 +6,7 @@ import { MapPin, Navigation, PhoneCall } from 'lucide-react';
 import { useCms } from '@/context/CmsContext';
 
 const DEFAULTS = {
-  badge: 'LOCAL SEO',
+  badge: 'Our Locations',
   headingLine1: 'Proudly Serving Armadale &',
   headingHighlight: "Perth's South-East",
   description:
@@ -44,6 +44,7 @@ export default function LocalSeoSection() {
           {/* LEFT COLUMN */}
           <div className="lg:col-span-7 space-y-6 text-left">
 
+            {/* SUBTITLE BADGE */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EAB308]/15 border border-[#EAB308]/40 text-xs font-black tracking-widest text-slate-900 uppercase shadow-xs">
               <span className="w-2 h-2 rounded-full bg-[#FF6B00]" />
               <span>{badge}</span>
@@ -113,6 +114,8 @@ export default function LocalSeoSection() {
                   backgroundImage: `url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUscNsNbC_q9mSXtvyZkWh7F1ag7HHwemgPLvHhPzLpcYxatve6-f_Q0w&s=10')`,
                 }}
               />
+
+              {/* White Gradient Overlay */}
               <div className="absolute inset-0 z-0 bg-gradient-to-b from-white/95 via-white/90 to-white/95" />
 
               <div className="flex items-center justify-between relative z-10">

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { DollarSign, Car, ShieldCheck, Clock, Award, ChevronRight } from 'lucide-react';
 import { useCms } from '@/context/CmsContext';
 
+// Fixed icon mapping array matching CMS feature items order
 const ICONS = [DollarSign, Car, ShieldCheck, Clock];
 
 const DEFAULTS = {
@@ -12,7 +13,7 @@ const DEFAULTS = {
   headingLine1: 'Workshop-Quality Care,',
   headingHighlight: 'Local Prices',
   image:
-    'https://images.unsplash.com/photo-1727893304219-063d142ce6f3?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'https://images.unsplash.com/photo-1727893304219-063d142ce6f3?q=80&w=800&auto=format&fit=crop',
   ctaText: 'BOOK YOUR SERVICE',
   reasons: [
     { title: 'Honest & Upfront Pricing', desc: 'No surprises. We quote before we start and only carry out approved work.' },
@@ -32,7 +33,10 @@ export default function WhyChooseUsSection() {
   const image = cms?.image || DEFAULTS.image;
   const ctaText = cms?.cta_text || DEFAULTS.ctaText;
   const items = cms?.items?.length ? cms.items : DEFAULTS.reasons;
-  const whyReasons = items.map((item, idx) => ({ ...item, icon: ICONS[idx] || ICONS[ICONS.length - 1] }));
+  const whyReasons = items.map((item, idx) => ({
+    ...item,
+    icon: ICONS[idx] || ICONS[ICONS.length - 1],
+  }));
 
   return (
     <section id="why" className="relative w-full bg-white text-slate-900 py-16 sm:py-20 lg:py-28 overflow-hidden border-b border-slate-200/80">
@@ -43,9 +47,10 @@ export default function WhyChooseUsSection() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-12 lg:gap-16 items-center">
 
-          {/* LEFT COLUMN */}
+          {/* LEFT COLUMN: TEXT CONTENT & FEATURES */}
           <div className="lg:col-span-7 space-y-6 text-left order-2 lg:order-1">
 
+            {/* SUBTITLE BADGE */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EAB308]/15 border border-[#EAB308]/40 text-xs font-black tracking-widest text-slate-900 uppercase shadow-xs">
               <span className="w-2 h-2 rounded-full bg-[#FF6B00]" />
               <span>{badge}</span>

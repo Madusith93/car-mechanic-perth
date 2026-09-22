@@ -11,7 +11,6 @@ const DEFAULT_SERVICES = [
   'Engine Diagnostics',
   'Suspension & Steering',
   'Air Conditioning',
-  'Tyres & Wheel Alignment',
   'Pre-Purchase Inspection',
   'Other',
 ];
@@ -95,7 +94,7 @@ export default function BookingSection() {
 
           <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-medium">
             Fill in the form and our team will call to confirm your booking. Prefer to talk? Call us on{' '}
-            <a href={`tel:${phoneTel}`} className="text-[#FF6B00] font-black hover:underline underline-offset-2">
+            <a href={`tel:${phoneTel}`} className="text-[#FF6B00] font-black hover:underline underline-offset-2 inline-block whitespace-nowrap">
               {phoneDisplay}
             </a>.
           </p>
@@ -117,7 +116,7 @@ export default function BookingSection() {
                 <button
                   type="button"
                   onClick={() => setStatus('idle')}
-                  className="text-xs font-black uppercase tracking-wider text-[#FF6B00] hover:underline"
+                  className="text-xs font-black uppercase tracking-wider text-[#FF6B00] hover:underline pt-2"
                 >
                   Submit another request
                 </button>
@@ -203,8 +202,10 @@ export default function BookingSection() {
                       onChange={(e) => setFormData({ ...formData, service: e.target.value })}
                       className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-900 focus:bg-white focus:outline-none focus:border-[#FF6B00] focus:ring-2 focus:ring-[#FF6B00]/20 transition-all font-semibold"
                     >
-                      {serviceOptions.map((option) => (
-                        <option key={option} value={option}>{option}</option>
+                      {serviceOptions.map((option: string) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
                       ))}
                     </select>
                   </div>
@@ -240,10 +241,10 @@ export default function BookingSection() {
                 <button
                   type="submit"
                   disabled={status === 'submitting'}
-                  className="w-full bg-gradient-to-r from-[#FF6B00] to-[#F97316] hover:from-[#e05e00] hover:to-[#ea580c] disabled:opacity-60 disabled:cursor-not-allowed text-white font-black py-4 rounded-xl text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 shadow-lg shadow-[#FF6B00]/25 active:scale-[0.99] flex items-center justify-center gap-2"
+                  className="w-full bg-gradient-to-r from-[#FF6B00] to-[#F97316] hover:from-[#e05e00] hover:to-[#ea580c] disabled:opacity-60 disabled:cursor-not-allowed text-white font-black py-4 rounded-xl text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 shadow-xl shadow-[#FF6B00]/40 hover:shadow-2xl hover:shadow-[#FF6B00]/50 hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2"
                 >
                   <Send className="w-4 h-4" />
-                  {status === 'submitting' ? 'Sending…' : 'Request Booking'}
+                  {status === 'submitting' ? 'SENDING…' : 'REQUEST BOOKING'}
                 </button>
 
               </form>

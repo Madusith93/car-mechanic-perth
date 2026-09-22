@@ -14,6 +14,7 @@ const DEFAULTS = {
   suburbs: ['Armadale', 'Kelmscott', 'Gosnells', 'Thornlie', 'Cannington', 'Byford', 'Seville Grove', 'Perth Metro'],
   address: '6 Aragon Crt, Armadale WA 6112',
   googleMapsUrl: 'https://maps.google.com/?q=6+Aragon+Crt,+Armadale+WA+6112',
+  businessName: 'Car Mechanic Perth',
 };
 
 export default function LocalSeoSection() {
@@ -28,53 +29,37 @@ export default function LocalSeoSection() {
   const suburbs = areas?.suburbs?.length ? areas.suburbs : DEFAULTS.suburbs;
   const address = site?.address || DEFAULTS.address;
   const googleMapsUrl = site?.google_maps_url || DEFAULTS.googleMapsUrl;
+  const phoneTel = site?.phone_tel || '0862449888';
+  const businessName = site?.business_name || DEFAULTS.businessName;
 
   return (
     <section id="areas" className="relative w-full bg-slate-50 text-slate-900 py-16 sm:py-20 lg:py-28 overflow-hidden border-b border-slate-200/80">
-      
-      {/* VIBRANT AMBIENT GLOW ACCENTS */}
+
       <div className="absolute top-1/3 -left-20 z-0 w-80 h-80 bg-[#FF6B00]/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 right-0 z-0 w-80 h-80 bg-[#EAB308]/15 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-12 lg:gap-16 items-center">
-          
-          {/* LEFT COLUMN: LOCAL SEO CONTENT & SUBURBS */}
+
+          {/* LEFT COLUMN */}
           <div className="lg:col-span-7 space-y-6 text-left">
-            
-            {/* SUBTITLE BADGE */}
-            <div className="inline-block text-xs font-bold tracking-[0.2em] text-[#FFC107] uppercase">
-              {badge}
-            </div>
 
-            {/* MAIN HEADING */}
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight text-white">
-              {headingLine1} <br />
-              <span className="text-[#FF6B00]">{headingHighlight}</span>
-            </h2>
-
-            {/* DESCRIPTION */}
-            <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-              {description}
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EAB308]/15 border border-[#EAB308]/40 text-xs font-black tracking-widest text-slate-900 uppercase shadow-xs">
               <span className="w-2 h-2 rounded-full bg-[#FF6B00]" />
-              <span>LOCAL SEO</span>
+              <span>{badge}</span>
             </div>
 
-            {/* MAIN HEADING */}
             <h2 className="text-3xl xs:text-4xl sm:text-5xl font-black tracking-tight leading-[1.15] text-slate-900">
-              Proudly Serving Armadale & <br />
+              {headingLine1} <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] via-[#F97316] to-[#EAB308]">
-                Perth&apos;s South-East
+                {headingHighlight}
               </span>
             </h2>
 
-            {/* DESCRIPTION */}
             <p className="text-slate-700 text-sm sm:text-base leading-relaxed font-medium">
-              Based on Aragon Crt in Armadale, Car Mechanic Perth is the convenient choice for drivers right across Perth&apos;s south-eastern suburbs. If you&apos;re searching for a reliable mechanic near you, we&apos;ve got you covered.
+              {description}
             </p>
 
-            {/* SERVICED SUBURBS GRID */}
             <div className="pt-2 space-y-3">
               <h3 className="text-xs font-black uppercase tracking-wider text-slate-500">
                 Suburbs We Cover Near You:
@@ -94,7 +79,6 @@ export default function LocalSeoSection() {
               </div>
             </div>
 
-            {/* ACTION BUTTONS */}
             <div className="flex flex-wrap items-center gap-4 pt-3">
               <a
                 href={googleMapsUrl}
@@ -107,9 +91,7 @@ export default function LocalSeoSection() {
               </a>
 
               <Link
-                href={`tel:${site?.phone_tel || '0862449888'}`}
-                className="inline-flex items-center gap-2 bg-transparent border-2 border-white/20 hover:border-[#FFC107] text-white hover:text-[#FFC107] font-extrabold px-8 py-3.5 rounded-full text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 active:scale-95"
-                href="tel:0862449888"
+                href={`tel:${phoneTel}`}
                 className="inline-flex items-center gap-2 bg-white hover:bg-slate-100 text-slate-900 font-black px-8 py-4 rounded-xl text-xs sm:text-sm tracking-wider uppercase border-2 border-slate-200 hover:border-[#FF6B00] shadow-sm transition-all duration-300"
               >
                 <PhoneCall className="w-4 h-4 text-[#FF6B00]" />
@@ -119,24 +101,18 @@ export default function LocalSeoSection() {
 
           </div>
 
-          {/* RIGHT COLUMN: LOCATION CARD WITH VISIBLE CAR BACKGROUND IMAGE */}
+          {/* RIGHT COLUMN: LOCATION CARD */}
           <div className="lg:col-span-5 relative w-full flex justify-center">
-            
-            {/* Tilted Vibrant Orange Gradient Accent Frame */}
             <div className="absolute inset-0 bg-gradient-to-tr from-[#FF6B00] via-[#F97316] to-[#EAB308] transform -rotate-2 rounded-3xl shadow-xl shadow-[#FF6B00]/20 translate-x-2 translate-y-2 sm:translate-x-3 sm:translate-y-3" />
 
-            {/* Location Card Container */}
             <div className="relative z-10 w-full rounded-2xl bg-white border-4 border-white p-6 sm:p-8 space-y-6 shadow-2xl overflow-hidden flex flex-col justify-between min-h-[380px]">
-              
-              {/* CLEAR BACKGROUND IMAGE WITH SOFT OVERLAY */}
-              <div 
+
+              <div
                 className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat transition-transform duration-700 hover:scale-105"
                 style={{
                   backgroundImage: `url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUscNsNbC_q9mSXtvyZkWh7F1ag7HHwemgPLvHhPzLpcYxatve6-f_Q0w&s=10')`,
                 }}
               />
-              
-              {/* White Gradient Overlay (Makes text easily readable while keeping image sharp) */}
               <div className="absolute inset-0 z-0 bg-gradient-to-b from-white/95 via-white/90 to-white/95" />
 
               <div className="flex items-center justify-between relative z-10">
@@ -152,17 +128,14 @@ export default function LocalSeoSection() {
                 <span className="text-xs font-black uppercase tracking-wider text-[#FF6B00]">
                   WORKSHOP LOCATION
                 </span>
-                <h3 className="text-xl sm:text-2xl font-black text-white">
-                  {site?.business_name || 'Car Mechanic Perth'}
                 <h3 className="text-2xl font-black text-slate-900">
-                  Car Mechanic Perth
+                  {businessName}
                 </h3>
                 <p className="text-slate-700 text-sm leading-relaxed font-bold">
                   {address}
                 </p>
               </div>
 
-              {/* Map Preview Callout */}
               <div className="bg-white/90 backdrop-blur-md border border-slate-200/90 rounded-xl p-4 space-y-1.5 relative z-10 shadow-sm">
                 <div className="flex items-center justify-between text-xs text-slate-500 font-bold uppercase tracking-wider">
                   <span>LOCATION HIGHLIGHT</span>
@@ -183,7 +156,6 @@ export default function LocalSeoSection() {
               </a>
 
             </div>
-
           </div>
 
         </div>

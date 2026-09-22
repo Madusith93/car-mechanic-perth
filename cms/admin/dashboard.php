@@ -14,6 +14,7 @@ if (!cms_is_logged_in()) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Car Mechanic Perth — CMS</title>
 <link rel="stylesheet" href="assets/admin.css">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 </head>
 <body>
   <header class="topbar">

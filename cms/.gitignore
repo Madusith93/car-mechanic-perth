@@ -1,0 +1,4 @@
+config.php
+data/bookings.json
+uploads/*
+!uploads/.gitkeep

@@ -42,35 +42,29 @@ export default function Footer() {
 
   return (
     <footer className="w-full bg-slate-900 text-white relative overflow-hidden border-t border-slate-800">
-      
-      {/* VIBRANT AMBIENT GLOW ACCENTS */}
+
       <div className="absolute top-0 left-1/4 z-0 w-96 h-96 bg-[#FF6B00]/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 z-0 w-96 h-96 bg-[#EAB308]/10 rounded-full blur-3xl pointer-events-none" />
 
-      {/* MAIN FOOTER CONTENT */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-12 lg:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12">
-          
+
           {/* COLUMN 1: BRAND INFO */}
           <div className="lg:col-span-5 space-y-4">
             <div className="flex items-center gap-2.5">
               <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#FF6B00] to-[#F97316] flex items-center justify-center text-white shadow-lg shadow-[#FF6B00]/25">
                 <Wrench className="w-5 h-5" />
               </div>
-              <span className="text-xl font-black  tracking-wider text-white">
-                {businessNameRest} <span className="text-[#FF6B00]">{businessNameLast}</span>
-              </span>
-            </div>
-            
-            <p className="text-slate-400 text-xs sm:text-sm leading-relaxed max-w-md">
-              {tagline}
               <span className="text-xl font-black tracking-tight text-white uppercase">
-                Car Mechanic <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] to-[#EAB308]">Perth</span>
+                {businessNameRest}{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] to-[#EAB308]">
+                  {businessNameLast}
+                </span>
               </span>
             </div>
-            
+
             <p className="text-slate-400 text-xs sm:text-sm leading-relaxed max-w-md font-medium">
-              Your local Armadale mechanic for logbook servicing, brakes, diagnostics and repairs. Trusted by drivers across Perth&apos;s south-east.
+              {tagline}
             </p>
           </div>
 
@@ -105,18 +99,14 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-4 h-4 text-[#FF6B00] shrink-0" />
-                <a href={`tel:${phoneTel}`} className="hover:text-[#FFC107] transition-colors">
+                <a href={`tel:${phoneTel}`} className="hover:text-[#EAB308] transition-colors">
                   {phoneDisplay}
-                <a href="tel:0862449888" className="hover:text-[#EAB308] transition-colors">
-                  08 6244 9888
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-[#FF6B00] shrink-0" />
-                <a href={`mailto:${email}`} className="hover:text-[#FFC107] transition-colors">
+                <a href={`mailto:${email}`} className="hover:text-[#EAB308] transition-colors">
                   {email}
-                <a href="mailto:cmechanicperth@gmail.com" className="hover:text-[#EAB308] transition-colors">
-                  cmechanicperth@gmail.com
                 </a>
               </li>
             </ul>
@@ -125,10 +115,9 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* BOTTOM COPYRIGHT & INCARNATE CREDIT */}
       <div className="relative z-10 w-full bg-slate-950/80 border-t border-slate-800 py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left text-xs text-slate-400 font-medium">
-          
+
           <div>
             © {currentYear} {copyrightSuffix}
           </div>

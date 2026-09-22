@@ -27,7 +27,7 @@
         { type: 'text', key: 'heading_highlight', label: 'Heading — Highlighted Word(s)' },
         { type: 'textarea', key: 'description', label: 'Description' },
         { type: 'text', key: 'cta_text', label: 'Button Text' },
-        { type: 'text', key: 'background_image', label: 'Background Image URL' },
+        { type: 'image', key: 'background_image', label: 'Background Image' },
         { type: 'list', key: 'features', label: 'Feature', itemLabel: 'Feature' },
       ],
     },
@@ -37,7 +37,7 @@
         { type: 'text', key: 'badge', label: 'Badge Text' },
         { type: 'text', key: 'heading_line1', label: 'Heading — Line 1' },
         { type: 'text', key: 'heading_highlight', label: 'Heading — Highlighted Word(s)' },
-        { type: 'text', key: 'image', label: 'Section Image URL' },
+        { type: 'image', key: 'image', label: 'Section Image' },
         { type: 'items', key: 'items', label: 'Service', subfields: [
           { key: 'title', label: 'Title', type: 'text' },
           { key: 'desc', label: 'Description', type: 'textarea' },
@@ -50,7 +50,7 @@
         { type: 'text', key: 'badge', label: 'Badge Text' },
         { type: 'text', key: 'heading_line1', label: 'Heading — Line 1' },
         { type: 'text', key: 'heading_highlight', label: 'Heading — Highlighted Word(s)' },
-        { type: 'text', key: 'image', label: 'Section Image URL' },
+        { type: 'image', key: 'image', label: 'Section Image' },
         { type: 'text', key: 'cta_text', label: 'Button Text' },
         { type: 'items', key: 'items', label: 'Reason', max: 4, subfields: [
           { key: 'title', label: 'Title', type: 'text' },
@@ -178,6 +178,24 @@
     panelContent.appendChild(form);
   }
 
+  function uploadImage(file, onDone) {
+    var formData = new FormData();
+    formData.append('image', file);
+
+    fetch(API + '/upload.php', {
+      method: 'POST',
+      credentials: 'include',
+      body: formData,
+    })
+      .then(function (res) { return res.json().then(function (b) { return { ok: res.ok, body: b }; }); })
+      .then(function (r) {
+        if (!r.ok) throw new Error(r.body.error || 'Upload failed.');
+        onDone(r.body.url);
+        showStatus('Image uploaded.', true);
+      })
+      .catch(function (err) { showStatus(err.message, false); });
+  }
+
   function renderField(field, data) {
     if (field.type === 'text' || field.type === 'textarea' || field.type === 'number') {
       var row = el('div', { class: 'field-row' });
@@ -188,6 +206,49 @@
       row.appendChild(label);
       row.appendChild(input);
       return row;
+    }
+
+    if (field.type === 'image') {
+      var irow = el('div', { class: 'field-row' });
+      irow.appendChild(el('label', { text: field.label }));
+
+      var preview = el('img', {
+        src: getPath(data, field.key) || '',
+        alt: '',
+        style: 'max-width:100%;max-height:160px;border-radius:8px;border:1px solid var(--border);margin-bottom:0.5rem;display:' + (getPath(data, field.key) ? 'block' : 'none'),
+      });
+
+      var urlInput = el('input', { type: 'text', placeholder: 'https:// or upload below' });
+      urlInput.value = getPath(data, field.key) || '';
+      urlInput.addEventListener('input', function () {
+        setPath(data, field.key, urlInput.value);
+        preview.src = urlInput.value;
+        preview.style.display = urlInput.value ? 'block' : 'none';
+      });
+
+      var fileInput = el('input', { type: 'file', accept: 'image/png,image/jpeg,image/webp,image/gif', style: 'display:none' });
+      var uploadBtn = el('button', { type: 'button', class: 'add-btn', text: 'Upload Image From Computer' });
+      uploadBtn.addEventListener('click', function () { fileInput.click(); });
+      fileInput.addEventListener('change', function () {
+        var file = fileInput.files && fileInput.files[0];
+        if (!file) return;
+        uploadBtn.textContent = 'Uploading…';
+        uploadBtn.disabled = true;
+        uploadImage(file, function (url) {
+          urlInput.value = url;
+          setPath(data, field.key, url);
+          preview.src = url;
+          preview.style.display = 'block';
+          uploadBtn.textContent = 'Upload Image From Computer';
+          uploadBtn.disabled = false;
+        });
+      });
+
+      irow.appendChild(preview);
+      irow.appendChild(urlInput);
+      irow.appendChild(fileInput);
+      irow.appendChild(uploadBtn);
+      return irow;
     }
 
     if (field.type === 'list') {
@@ -325,15 +386,15 @@
           });
 
           var tr = el('tr', {}, [
-            el('td', { text: new Date(b.createdAt).toLocaleString() }),
-            el('td', { text: b.fullName }),
-            el('td', { text: [b.phone, b.email].filter(Boolean).join(' · ') }),
-            el('td', { text: b.vehicle || '—' }),
-            el('td', { text: b.service }),
-            el('td', { text: b.preferredDate || '—' }),
-            el('td', { text: b.issue || '—' }),
+            el('td', { text: new Date(b.createdAt).toLocaleString(), 'data-label': 'Received' }),
+            el('td', { text: b.fullName, 'data-label': 'Name' }),
+            el('td', { text: [b.phone, b.email].filter(Boolean).join(' · '), 'data-label': 'Contact' }),
+            el('td', { text: b.vehicle || '—', 'data-label': 'Vehicle' }),
+            el('td', { text: b.service, 'data-label': 'Service' }),
+            el('td', { text: b.preferredDate || '—', 'data-label': 'Preferred Date' }),
+            el('td', { text: b.issue || '—', 'data-label': 'Issue' }),
           ]);
-          var statusTd = el('td', {});
+          var statusTd = el('td', { 'data-label': 'Status' });
           statusTd.appendChild(statusSelect);
           tr.appendChild(statusTd);
           tbody.appendChild(tr);

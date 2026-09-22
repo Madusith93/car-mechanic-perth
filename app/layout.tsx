@@ -145,9 +145,6 @@ export default function RootLayout({
           </div>
           <Footer />
         </CmsProvider>
-        <Navbar />
-        <div className="flex-1">{children}</div>
-        <Footer />
       </body>
     </html>
   );

@@ -1,7 +1,8 @@
 'use client';
 
 import React from 'react';
-import { MapPin, Navigation } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { MapPin, Navigation, Sparkles } from 'lucide-react';
 import { useCms } from '@/context/CmsContext';
 
 const DEFAULTS = {
@@ -20,48 +21,56 @@ export default function MapSection() {
   const googleMapsUrl = site?.google_maps_url || DEFAULTS.googleMapsUrl;
 
   return (
-    <section className="relative w-full bg-slate-50 text-slate-900 py-12 lg:py-16 border-b border-slate-200/80 overflow-hidden">
+    <section className="relative w-full bg-slate-50 text-slate-900 py-12 sm:py-16 lg:py-20 border-b border-slate-200/80 overflow-hidden">
       
-      {/* VIBRANT AMBIENT GLOW ACCENTS */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0 w-[500px] h-[300px] bg-[#FF6B00]/10 rounded-full blur-3xl pointer-events-none" />
+      {/* VIBRANT AMBIENT GLOW ACCENTS (ORANGE & ELECTRIC BLUE) */}
+      <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 z-0 w-[450px] h-[250px] bg-[#FF6B00]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 z-0 w-[450px] h-[250px] bg-[#00D2FF]/12 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         
-        <div className="relative w-full max-w-5xl mx-auto">
+        <motion.div 
+          initial={{ opacity: 0, y: 30, scale: 0.97 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="relative w-full max-w-5xl mx-auto group"
+        >
           
-          {/* Tilted Orange Accent Background */}
-          <div className="absolute inset-0 bg-gradient-to-tr from-[#FF6B00] via-[#F97316] to-[#EAB308] transform -rotate-1 sm:-rotate-2 rounded-2xl shadow-xl shadow-[#FF6B00]/20 translate-x-1.5 translate-y-1.5 sm:translate-x-2.5 sm:translate-y-2.5" />
+          {/* Tilted Orange & Electric Blue Gradient Accent Frame */}
+          <div className="absolute inset-0 bg-gradient-to-tr from-[#FF6B00] via-[#00D2FF] to-[#0052D4] transform -rotate-1 sm:-rotate-2 rounded-2xl shadow-xl shadow-[#FF6B00]/15 group-hover:rotate-0 group-hover:scale-[1.01] transition-all duration-500 translate-x-1.5 translate-y-1.5 sm:translate-x-2.5 sm:translate-y-2.5" />
 
           {/* Map Container */}
-          <div className="relative z-10 w-full rounded-2xl bg-white border border-slate-200/90 overflow-hidden shadow-xl">
+          <div className="relative z-10 w-full rounded-2xl bg-white border-2 border-slate-200/90 overflow-hidden shadow-2xl group-hover:border-[#00D2FF] transition-colors duration-300">
             
             {/* Map Header Bar */}
-            <div className="bg-slate-50/90 backdrop-blur-md px-6 py-4 border-b border-slate-200/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-[#FF6B00]/10 border border-[#FF6B00]/20 flex items-center justify-center shrink-0">
-                  <MapPin className="w-5 h-5 text-[#FF6B00]" />
+            <div className="bg-white/90 backdrop-blur-md px-6 py-4 border-b border-slate-200/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div className="flex items-center gap-3.5">
+                <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#FF6B00] to-[#F97316] flex items-center justify-center shrink-0 shadow-md shadow-[#FF6B00]/25">
+                  <MapPin className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-extrabold text-white">Find Our Workshop</h3>
-                  <p className="text-xs text-slate-400">{address}</p>
-                  <h3 className="text-sm font-black text-slate-900 uppercase tracking-tight">Find Our Workshop</h3>
-                  <p className="text-xs font-semibold text-slate-500">6 Aragon Crt, Armadale WA 6112</p>
+                  <div className="flex items-center gap-1.5">
+                    <h3 className="text-sm font-black text-slate-900 uppercase tracking-tight">Find Our Workshop</h3>
+                    <Sparkles className="w-3.5 h-3.5 text-[#00D2FF]" />
+                  </div>
+                  <p className="text-xs font-bold text-slate-600">{address}</p>
                 </div>
               </div>
 
-             <a
-  href="https://maps.google.com/?q=6+Aragon+Crt,+Armadale+WA+6112"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="inline-flex items-center gap-2 bg-gradient-to-r from-[#FF6B00] to-[#F97316] hover:from-[#e05e00] hover:to-[#ea580c] text-white font-black px-4 py-2.5 rounded-xl text-xs tracking-wider uppercase transition-all duration-300 shadow-xl shadow-[#FF6B00]/40 hover:shadow-2xl hover:shadow-[#FF6B00]/50 hover:-translate-y-0.5 active:translate-y-0"
->
-  <Navigation className="w-3.5 h-3.5" />
-  <span>Open Directions</span>
-</a>
+              <a
+                href={googleMapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-[#FF6B00] to-[#F97316] hover:from-[#e05e00] hover:to-[#ea580c] text-white font-black px-5 py-2.5 rounded-xl text-xs tracking-wider uppercase transition-all duration-300 shadow-lg shadow-[#FF6B00]/30 hover:shadow-xl hover:shadow-[#FF6B00]/40 hover:-translate-y-0.5 active:translate-y-0"
+              >
+                <Navigation className="w-3.5 h-3.5" />
+                <span>Open Directions</span>
+              </a>
             </div>
 
             {/* Google Map iFrame */}
-            <div className="w-full h-[320px] sm:h-[400px] relative bg-slate-100">
+            <div className="w-full h-[320px] sm:h-[420px] relative bg-slate-100">
               <iframe
                 title="Workshop Location Map"
                 src={mapEmbedUrl}
@@ -71,13 +80,13 @@ export default function MapSection() {
                 allowFullScreen={false}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                className="w-full h-full transition-all duration-500"
+                className="w-full h-full"
               />
             </div>
 
           </div>
 
-        </div>
+        </motion.div>
 
       </div>
     </section>

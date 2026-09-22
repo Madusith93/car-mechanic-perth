@@ -43,8 +43,9 @@ export default function Footer() {
   return (
     <footer className="w-full bg-slate-900 text-white relative overflow-hidden border-t border-slate-800">
 
+      {/* VIBRANT AMBIENT GLOW ACCENTS (ORANGE & ELECTRIC BLUE) */}
       <div className="absolute top-0 left-1/4 z-0 w-96 h-96 bg-[#FF6B00]/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 z-0 w-96 h-96 bg-[#EAB308]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 z-0 w-96 h-96 bg-[#00D2FF]/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-12 lg:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12">
@@ -57,7 +58,7 @@ export default function Footer() {
               </div>
               <span className="text-xl font-black tracking-tight text-white uppercase">
                 {businessNameRest}{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] to-[#EAB308]">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] via-[#00D2FF] to-[#0052D4]">
                   {businessNameLast}
                 </span>
               </span>
@@ -70,7 +71,7 @@ export default function Footer() {
 
           {/* COLUMN 2: SERVICES LINKS */}
           <div className="lg:col-span-3 space-y-4">
-            <h3 className="text-xs font-black uppercase tracking-widest text-[#EAB308]">
+            <h3 className="text-xs font-black uppercase tracking-widest text-[#00D2FF]">
               Our Services
             </h3>
             <ul className="space-y-2.5">
@@ -89,7 +90,7 @@ export default function Footer() {
 
           {/* COLUMN 3: CONTACT INFO */}
           <div className="lg:col-span-4 space-y-4">
-            <h3 className="text-xs font-black uppercase tracking-widest text-[#EAB308]">
+            <h3 className="text-xs font-black uppercase tracking-widest text-[#00D2FF]">
               Contact Us
             </h3>
             <ul className="space-y-3 text-xs sm:text-sm text-slate-300 font-medium">
@@ -99,13 +100,13 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-4 h-4 text-[#FF6B00] shrink-0" />
-                <a href={`tel:${phoneTel}`} className="hover:text-[#EAB308] transition-colors">
+                <a href={`tel:${phoneTel}`} className="hover:text-[#00D2FF] transition-colors">
                   {phoneDisplay}
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-[#FF6B00] shrink-0" />
-                <a href={`mailto:${email}`} className="hover:text-[#EAB308] transition-colors">
+                <a href={`mailto:${email}`} className="hover:text-[#00D2FF] transition-colors">
                   {email}
                 </a>
               </li>

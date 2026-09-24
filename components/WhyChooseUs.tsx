@@ -68,7 +68,7 @@ export default function ServicesSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-12 lg:gap-16 items-center">
 
           {/* LEFT COLUMN: FEATURED IMAGE WITH DYNAMIC POP IN ANIMATION */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.9, x: -30 }}
             whileInView={{ opacity: 1, scale: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -82,11 +82,11 @@ export default function ServicesSection() {
               <img
                 src={image}
                 alt="Professional Car Mechanic at Work"
-                className="w-full h-full object-cover object-center transform group-hover:scale-108 transition-transform duration-700"
+                className="w-full h-full object-cover object-center transform group-hover:scale-[1.08] transition-transform duration-700"
               />
 
               {/* Floating Badge overlay with Subtle Pop Effect */}
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -111,7 +111,7 @@ export default function ServicesSection() {
           <div className="lg:col-span-7 space-y-6 text-left">
 
             {/* SUBTITLE BADGE WITH ELECTRIC BLUE ACCENT */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -122,7 +122,7 @@ export default function ServicesSection() {
             </motion.div>
 
             {/* HEADING WITH MULTI-COLOR GRADIENT */}
-            <motion.h2 
+            <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -130,13 +130,13 @@ export default function ServicesSection() {
               className="text-3xl xs:text-4xl sm:text-5xl font-black tracking-tight leading-[1.15] text-slate-900"
             >
               {headingLine1} <br className="hidden xs:block" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] via-[#F97316] via-[#00D2FF] to-[#0052D4]">
+              <span className="text-transparent bg-clip-text bg-[linear-gradient(to_right,#FF6B00,#F97316,#00D2FF,#0052D4)]">
                 {headingHighlight}
               </span>
             </motion.h2>
 
             {/* STAGGERED POPPING SERVICE CARDS GRID */}
-            <motion.div 
+            <motion.div
               variants={containerVariants}
               initial="hidden"
               whileInView="visible"
@@ -152,11 +152,11 @@ export default function ServicesSection() {
                   className="relative bg-white border border-slate-200/90 hover:border-[#00D2FF] p-4 sm:p-5 rounded-2xl space-y-2 transition-colors duration-300 shadow-xs hover:shadow-xl hover:shadow-[#00D2FF]/20 group overflow-hidden cursor-pointer"
                 >
                   {/* Subtle Top Gradient Bar on Hover */}
-                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#FF6B00] via-[#00D2FF] to-[#0052D4] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-[linear-gradient(to_right,#FF6B00,#00D2FF,#0052D4)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                   <div className="flex items-center justify-between gap-2.5">
                     <div className="flex items-center gap-2.5">
-                      <div className="w-7 h-7 rounded-lg bg-[#FF6B00]/10 flex items-center justify-center shrink-0 group-hover:bg-gradient-to-r group-hover:from-[#FF6B00] group-hover:to-[#0052D4] transition-all duration-300">
+                      <div className="w-7 h-7 rounded-lg bg-[#FF6B00]/10 flex items-center justify-center shrink-0 group-hover:bg-[linear-gradient(to_right,#FF6B00,#0052D4)] transition-all duration-300">
                         <CheckCircle2 className="w-4 h-4 text-[#FF6B00] group-hover:text-white transition-colors" />
                       </div>
                       <h3 className="font-extrabold text-sm text-slate-900 group-hover:text-[#0052D4] transition-colors">{item.title}</h3>

@@ -40,6 +40,25 @@ export interface ServicesContent {
   items: TitledItem[];
 }
 
+export interface ServicePageItem {
+  title: string;
+  description: string;
+  whatsIncluded: string[];
+  signs: string;
+  closing: string;
+}
+
+export interface ServicesPageContent {
+  badge: string;
+  heading_line1: string;
+  heading_highlight: string;
+  description: string;
+  cta_heading: string;
+  cta_description: string;
+  cta_button_text: string;
+  items: ServicePageItem[];
+}
+
 export interface WhyUsContent extends ServicesContent {
   cta_text: string;
 }
@@ -86,6 +105,7 @@ export interface CmsContent {
   site: SiteContent;
   hero: HeroContent;
   services: ServicesContent;
+  servicesPage: ServicesPageContent;
   whyUs: WhyUsContent;
   areas: AreasContent;
   reviews: ReviewsContent;

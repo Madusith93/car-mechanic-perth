@@ -13,8 +13,8 @@ if (!cms_is_logged_in()) {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Car Mechanic Perth — CMS</title>
+<link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="stylesheet" href="assets/admin.css">
-<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 </head>
 <body>
   <header class="topbar">
@@ -26,7 +26,8 @@ if (!cms_is_logged_in()) {
     <nav class="tabs" id="tabs">
       <button data-tab="site" class="tab active">Business Info</button>
       <button data-tab="hero" class="tab">Hero</button>
-      <button data-tab="services" class="tab">Services</button>
+      <button data-tab="services" class="tab">Services (Homepage)</button>
+      <button data-tab="services-page" class="tab">Services Page (Detailed)</button>
       <button data-tab="why-us" class="tab">Why Choose Us</button>
       <button data-tab="areas" class="tab">Service Areas</button>
       <button data-tab="reviews" class="tab">Reviews</button>

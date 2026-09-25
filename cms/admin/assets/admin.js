@@ -32,7 +32,7 @@
       ],
     },
     services: {
-      title: 'Services ("What We Do")',
+      title: 'Services ("What We Do" — Homepage)',
       fields: [
         { type: 'text', key: 'badge', label: 'Badge Text' },
         { type: 'text', key: 'heading_line1', label: 'Heading — Line 1' },
@@ -41,6 +41,25 @@
         { type: 'items', key: 'items', label: 'Service', subfields: [
           { key: 'title', label: 'Title', type: 'text' },
           { key: 'desc', label: 'Description', type: 'textarea' },
+        ] },
+      ],
+    },
+    'services-page': {
+      title: 'Services Page — Detailed Service Content',
+      fields: [
+        { type: 'text', key: 'badge', label: 'Badge Text' },
+        { type: 'text', key: 'heading_line1', label: 'Heading — Line 1' },
+        { type: 'text', key: 'heading_highlight', label: 'Heading — Highlighted Word(s)' },
+        { type: 'textarea', key: 'description', label: 'Intro Description (under the heading)' },
+        { type: 'text', key: 'cta_heading', label: 'Bottom CTA — Heading' },
+        { type: 'textarea', key: 'cta_description', label: 'Bottom CTA — Description' },
+        { type: 'text', key: 'cta_button_text', label: 'Bottom CTA — Button Text' },
+        { type: 'items', key: 'items', label: 'Service', note: 'Order is fixed — each service keeps its icon by position. Editing text is safe; adding/removing/reordering will shift icons.', subfields: [
+          { key: 'title', label: 'Title', type: 'text' },
+          { key: 'description', label: 'Intro Paragraph', type: 'textarea' },
+          { key: 'whatsIncluded', label: "What's Included (one per line)", type: 'list-textarea' },
+          { key: 'signs', label: 'Signs You Need This Service', type: 'textarea' },
+          { key: 'closing', label: 'Closing Line', type: 'textarea' },
         ] },
       ],
     },
@@ -281,16 +300,35 @@
     if (field.type === 'items') {
       var iwrap = el('div', { class: 'field-row' });
       iwrap.appendChild(el('label', { text: field.label + ' list' }));
+      if (field.note) {
+        iwrap.appendChild(el('p', { text: field.note, style: 'font-size:0.75rem;color:var(--muted);margin:-0.3rem 0 0.5rem;' }));
+      }
       var items = getPath(data, field.key) || (setPath(data, field.key, []) || getPath(data, field.key));
       var iListWrap = el('div', {});
       function redrawItems() {
         iListWrap.innerHTML = '';
         items.forEach(function (obj, idx) {
           var card = el('div', { class: 'list-item' });
+          card.appendChild(el('div', {
+            text: (idx + 1) + ' / ' + items.length,
+            style: 'font-size:0.7rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.5rem;',
+          }));
           field.subfields.forEach(function (sf) {
             var srow = el('div', { class: 'field-row' });
             srow.appendChild(el('label', { text: sf.label }));
-            var sinput = sf.type === 'textarea' ? el('textarea', { rows: 2 }) : el('input', { type: sf.type === 'number' ? 'number' : 'text' });
+
+            if (sf.type === 'list-textarea') {
+              var listInput = el('textarea', { rows: 5 });
+              listInput.value = Array.isArray(obj[sf.key]) ? obj[sf.key].join('\n') : '';
+              listInput.addEventListener('input', function () {
+                obj[sf.key] = listInput.value.split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
+              });
+              srow.appendChild(listInput);
+              card.appendChild(srow);
+              return;
+            }
+
+            var sinput = sf.type === 'textarea' ? el('textarea', { rows: sf.key === 'description' || sf.key === 'signs' ? 4 : 2 }) : el('input', { type: sf.type === 'number' ? 'number' : 'text' });
             sinput.value = obj[sf.key] != null ? obj[sf.key] : '';
             sinput.addEventListener('input', function () {
               obj[sf.key] = sf.type === 'number' ? Number(sinput.value) : sinput.value;
@@ -311,7 +349,9 @@
         iAddBtn.addEventListener('click', function () {
           if (field.max && items.length >= field.max) return;
           var blank = {};
-          field.subfields.forEach(function (sf) { blank[sf.key] = sf.type === 'number' ? 0 : ''; });
+          field.subfields.forEach(function (sf) {
+            blank[sf.key] = sf.type === 'number' ? 0 : sf.type === 'list-textarea' ? [] : '';
+          });
           items.push(blank);
           redrawItems();
         });

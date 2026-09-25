@@ -5,7 +5,7 @@
  * a whitelist so the API can never read/write outside that folder.
  */
 
-const CMS_SECTIONS = ['site', 'hero', 'services', 'why-us', 'areas', 'reviews', 'footer', 'booking'];
+const CMS_SECTIONS = ['site', 'hero', 'services', 'services-page', 'why-us', 'areas', 'reviews', 'footer', 'booking'];
 
 function cms_section_path(string $section): ?string {
     if (!in_array($section, CMS_SECTIONS, true)) {
@@ -57,7 +57,7 @@ function cms_write_section(string $section, $data): bool {
     return $ok;
 }
 
-/** site -> site, why-us -> whyUs (for the JSON the frontend consumes) */
+/** site -> site, why-us -> whyUs, services-page -> servicesPage */
 function cms_camel(string $section): string {
     $parts = explode('-', $section);
     $first = array_shift($parts);

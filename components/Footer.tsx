@@ -58,7 +58,7 @@ export default function Footer() {
               </div>
               <span className="text-xl font-black tracking-tight text-white uppercase">
                 {businessNameRest}{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] via-[#00D2FF] to-[#0052D4]">
+                <span className="text-transparent bg-clip-text bg-[linear-gradient(to_right,#FF6B00_0%,#FF6B00_55%,#94A3B8_100%)]">
                   {businessNameLast}
                 </span>
               </span>

@@ -339,7 +339,7 @@ export default function ServicesSection() {
   const ctaButtonText = servicesPage?.cta_button_text || DEFAULTS_PAGE.ctaButtonText;
 
   const servicesData: ServiceDetail[] = servicesPage?.items?.length
-    ? servicesPage.items.map((item: Omit<ServiceDetail, 'icon'>, idx: number) => ({
+    ? servicesPage.items.map((item: ServicePageItem, idx: number) => ({
         ...item,
         icon: SERVICE_ICONS[idx] || Wrench,
       }))
@@ -350,8 +350,8 @@ export default function ServicesSection() {
   return (
     <section id="services" className="relative w-full bg-white text-slate-900 py-16 sm:py-20 lg:py-28 overflow-hidden border-b border-slate-200/80">
 
-      <div className="absolute top-1/4 -right-20 z-0 w-96 h-96 bg-[#1E90FF]/15 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 -left-20 z-0 w-96 h-96 bg-[#FEA500]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/4 -right-20 z-0 w-96 h-96 bg-[#FEA500]/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 -left-20 z-0 w-96 h-96 bg-[#1E90FF]/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
 
@@ -363,7 +363,7 @@ export default function ServicesSection() {
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4 }}
-            className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border-2 border-[#1E90FF] text-xs font-black tracking-widest text-slate-900 uppercase shadow-md shadow-[#1E90FF]/15 hover:scale-105 transition-transform duration-300"
+            className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border-2 border-[#FEA500] text-xs font-black tracking-widest text-slate-900 uppercase shadow-md shadow-[#FEA500]/15 hover:scale-105 transition-transform duration-300"
           >
             <span className="w-2 h-2 rounded-full bg-[#FEA500] animate-ping" />
             <span>{badge}</span>
@@ -377,7 +377,7 @@ export default function ServicesSection() {
             className="text-3xl xs:text-4xl sm:text-5xl font-black tracking-tight leading-[1.15] text-slate-900"
           >
             {headingLine1}{' '}
-            <span className="text-transparent bg-clip-text bg-[linear-gradient(to_right,#FEA500,#1E90FF,#FED700)]">
+            <span className="text-transparent bg-clip-text bg-[linear-gradient(to_right,#FEA500,#FF8C00,#1E90FF)]">
               {headingHighlight}
             </span>
           </motion.h2>
@@ -410,16 +410,16 @@ export default function ServicesSection() {
                 variants={popCardVariants}
                 whileHover={{ scale: 1.02, y: -6 }}
                 whileTap={{ scale: 0.98 }}
-                className="group relative text-left bg-slate-50 border border-slate-200/90 hover:border-[#1E90FF] rounded-2xl p-6 sm:p-8 transition-colors duration-300 shadow-xs hover:shadow-xl hover:shadow-[#1E90FF]/15 flex flex-col justify-between overflow-hidden cursor-pointer"
+                className="group relative text-left bg-slate-50 border border-slate-200/90 hover:border-[#FEA500] rounded-2xl p-6 sm:p-8 transition-colors duration-300 shadow-xs hover:shadow-xl hover:shadow-[#FEA500]/15 flex flex-col justify-between overflow-hidden cursor-pointer"
               >
-                <div className="absolute top-0 left-0 right-0 h-1 bg-[linear-gradient(to_right,#FEA500,#1E90FF,#FED700)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute top-0 left-0 right-0 h-1 bg-[linear-gradient(to_right,#FEA500,#FF8C00,#1E90FF)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                 <div className="space-y-4">
-                  <div className="w-12 h-12 rounded-xl bg-[linear-gradient(135deg,#FEA500,#1E90FF)] text-white flex items-center justify-center shrink-0 shadow-md shadow-[#FEA500]/20 group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-12 h-12 rounded-xl bg-[linear-gradient(135deg,#FEA500,#FF8C00)] text-white flex items-center justify-center shrink-0 shadow-md shadow-[#FEA500]/20 group-hover:scale-110 transition-transform duration-300">
                     <IconComponent className="w-6 h-6 text-white stroke-[2.5]" />
                   </div>
 
-                  <h3 className="text-lg sm:text-xl font-black text-slate-900 group-hover:text-[#1E90FF] transition-colors duration-300">
+                  <h3 className="text-lg sm:text-xl font-black text-slate-900 group-hover:text-[#FEA500] transition-colors duration-300">
                     {service.title}
                   </h3>
 
@@ -429,7 +429,7 @@ export default function ServicesSection() {
                 </div>
 
                 <div className="pt-6 mt-6 border-t border-slate-200/80 flex items-center justify-between">
-                  <span className="text-xs font-extrabold uppercase tracking-wider text-[#FEA500] group-hover:text-[#1E90FF] flex items-center gap-1.5 transition-colors duration-300">
+                  <span className="text-xs font-extrabold uppercase tracking-wider text-[#FEA500] flex items-center gap-1.5 transition-colors duration-300">
                     <span>View Details</span>
                     <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                   </span>
@@ -446,7 +446,7 @@ export default function ServicesSection() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="mt-16 bg-slate-50 border border-slate-200/90 rounded-3xl p-8 lg:p-12 text-center flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl relative overflow-hidden"
         >
-          <div className="absolute -right-10 -bottom-10 w-64 h-64 bg-[#1E90FF]/10 rounded-full blur-2xl pointer-events-none" />
+          <div className="absolute -right-10 -bottom-10 w-64 h-64 bg-[#FEA500]/10 rounded-full blur-2xl pointer-events-none" />
 
           <div className="text-left space-y-2 max-w-2xl">
             <h4 className="text-xl sm:text-2xl font-black uppercase text-slate-900">
@@ -459,9 +459,9 @@ export default function ServicesSection() {
 
           <Link
             href="/#contact"
-            className="relative group shrink-0 inline-flex overflow-hidden rounded-xl p-[2px] font-black text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] shadow-xl shadow-[#FEA500]/25 hover:shadow-2xl hover:shadow-[#1E90FF]/35"
+            className="relative group shrink-0 inline-flex overflow-hidden rounded-xl p-[2px] font-black text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] shadow-xl shadow-[#FEA500]/25 hover:shadow-2xl hover:shadow-[#FEA500]/40"
           >
-            <span className="absolute inset-0 bg-[linear-gradient(to_right,#FEA500,#1E90FF,#FED700)] group-hover:opacity-100 transition-opacity duration-300" />
+            <span className="absolute inset-0 bg-[linear-gradient(to_right,#FEA500,#FF8C00,#1E90FF)] group-hover:opacity-100 transition-opacity duration-300" />
             <span className="relative block px-8 py-4 rounded-[10px] bg-[linear-gradient(to_right,#FEA500,#FF8C00)] text-white group-hover:bg-transparent transition-all duration-300 flex items-center gap-2">
               <span>{ctaButtonText}</span>
               <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -491,7 +491,7 @@ export default function ServicesSection() {
               onClick={(e) => e.stopPropagation()}
               className="relative w-full max-w-2xl max-h-[88vh] overflow-y-auto bg-white rounded-3xl shadow-2xl border border-slate-200/80"
             >
-              <div className="h-1.5 w-full bg-[linear-gradient(to_right,#FEA500,#1E90FF,#FED700)] rounded-t-3xl" />
+              <div className="h-1.5 w-full bg-[linear-gradient(to_right,#FEA500,#FF8C00,#1E90FF)] rounded-t-3xl" />
 
               <button
                 type="button"
@@ -505,7 +505,7 @@ export default function ServicesSection() {
               <div className="p-6 sm:p-8 lg:p-10 space-y-6">
 
                 <div className="flex items-center gap-4 pr-10">
-                  <div className="w-14 h-14 rounded-2xl bg-[linear-gradient(135deg,#FEA500,#1E90FF)] text-white flex items-center justify-center shrink-0 shadow-lg shadow-[#FEA500]/25">
+                  <div className="w-14 h-14 rounded-2xl bg-[linear-gradient(135deg,#FEA500,#FF8C00)] text-white flex items-center justify-center shrink-0 shadow-lg shadow-[#FEA500]/25">
                     {React.createElement(activeService.icon, { className: 'w-7 h-7 stroke-[2.5]' })}
                   </div>
                   <h3 className="text-2xl sm:text-3xl font-black text-slate-900 leading-tight">
@@ -518,7 +518,7 @@ export default function ServicesSection() {
                 </p>
 
                 <div className="bg-slate-50 border border-slate-200/90 rounded-2xl p-5 sm:p-6 space-y-3">
-                  <h4 className="text-xs font-black uppercase tracking-widest text-[#1E90FF]">
+                  <h4 className="text-xs font-black uppercase tracking-widest text-[#FEA500]">
                     What&apos;s Included
                   </h4>
                   <ul className="space-y-2">
@@ -531,7 +531,7 @@ export default function ServicesSection() {
                   </ul>
                 </div>
 
-                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-medium border-l-4 border-[#FED700] pl-4">
+                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-medium border-l-4 border-[#FEA500] pl-4">
                   {activeService.signs}
                 </p>
 
@@ -548,9 +548,10 @@ export default function ServicesSection() {
                     <CalendarCheck className="w-4 h-4" />
                     <span>Request a Booking</span>
                   </Link>
+                  
                   <a
                     href={`tel:${phoneTel}`}
-                    className="flex-1 inline-flex items-center justify-center gap-2 bg-white border-2 border-[#1E90FF] hover:bg-[#1E90FF]/5 text-[#1E90FF] font-black px-6 py-3.5 rounded-xl text-xs sm:text-sm tracking-wider uppercase transition-all duration-300"
+                    className="flex-1 inline-flex items-center justify-center gap-2 bg-white border-2 border-[#FEA500] hover:bg-[#FEA500]/5 text-[#FEA500] font-black px-6 py-3.5 rounded-xl text-xs sm:text-sm tracking-wider uppercase transition-all duration-300"
                   >
                     <Phone className="w-4 h-4" />
                     <span>Call {phoneDisplay}</span>

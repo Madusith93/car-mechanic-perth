@@ -7,14 +7,14 @@ import { MapPin, Navigation, PhoneCall, Sparkles } from 'lucide-react';
 import { useCms } from '@/context/CmsContext';
 
 const DEFAULTS = {
-  badge: 'Our Locations',
-  headingLine1: 'Proudly Serving Armadale &',
-  headingHighlight: "Perth's South-East",
+  badge: 'LOCAL EXPERTISE',
+  headingLine1: 'Proudly Servicing',
+  headingHighlight: 'Kelmscott',
   description:
-    "Based on Aragon Crt in Armadale, Car Mechanic Perth is the convenient choice for drivers right across Perth's south-eastern suburbs. If you're searching for a reliable mechanic near you, we've got you covered.",
-  suburbs: ['Armadale', 'Kelmscott', 'Gosnells', 'Thornlie', 'Cannington', 'Byford', 'Seville Grove', 'Perth Metro'],
-  address: '6 Aragon Crt, Armadale WA 6112',
-  googleMapsUrl: 'https://maps.google.com/?q=6+Aragon+Crt,+Armadale+WA+6112',
+    "We've been working on cars in Kelmscott long enough to know the roads, the traffic and the kind of driving that wears a vehicle down out here. That local knowledge is part of why people call us the best car mechanic in Kelmscott rather than driving into the city for a service. Families, tradies and daily commuters across Armadale bring their cars to us because we're close, we know what we're doing, and we don't overcomplicate things.",
+  suburbs: ['Kelmscott', 'Armadale', 'Kelmscott', 'Gosnells', 'Thornlie', 'Cannington', 'Byford', 'Seville Grove', 'Perth Metro'],
+  address: 'Unit 1, 38 Owen Road, Kelmscott WA 6112',
+  googleMapsUrl: 'https://maps.google.com/?q=Unit+1,+38+Owen+Road,+Kelmscott+WA+6112',
   businessName: 'Car Mechanic Perth',
 };
 

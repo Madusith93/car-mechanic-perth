@@ -1,34 +1,36 @@
 import type { Metadata } from 'next';
 import Hero from '@/components/Hero';
+import AboutUs from '@/components/AboutUs';
 import WhyChooseUs from '@/components/WhyChooseUs';
 import LocalPrices from '@/components/LocalPrices';
+import OurProcess from '@/components/OurProcess';
 import Servingareas from '@/components/Servingareas';
 import ReviewsSection from '@/components/Reviews';
+import FAQSection from '@/components/FAQSection';
 import BookingSection from '@/components/BookOnline';
 import Map from '@/components/Map';
 
-// NEXT.JS APP ROUTER SEO METADATA
 export const metadata: Metadata = {
-  title: 'Car Mechanic Perth | Premier Auto Repair & Logbook Servicing Armadale',
+  title: '#1 Car Mechanic in Kelmscott | Reliable Auto Servicing & Repairs Perth WA',
   description:
-    'Trusted mechanic in Armadale & Perth South-East. Honest upfront pricing for logbook servicing, brake repairs, diagnostics, suspension & auto A/C. Book online today!',
+    'Trusted car mechanic in Kelmscott and Armadale. Honest upfront pricing for logbook servicing, brake repairs, diagnostics, suspension & auto A/C. Book online today!',
   keywords: [
-    'Car Mechanic Perth',
+    'Car Mechanic Kelmscott',
+    'Best Car Mechanic in Kelmscott',
     'Mechanic Armadale WA',
     'Auto Repair Perth South-East',
-    'Logbook Servicing Armadale',
+    'Logbook Servicing Kelmscott',
     'Brake Repairs Kelmscott',
-    'Engine Diagnostics Gosnells',
+    'Engine Diagnostics Kelmscott',
     'Car Service Near Me Perth',
-    'Car Mechanic Perth South-East',
   ],
   authors: [{ name: 'Car Mechanic Perth' }],
   creator: 'Car Mechanic Perth',
   openGraph: {
-    title: 'Car Mechanic Perth | Workshop-Quality Care, Local Prices',
+    title: '#1 Car Mechanic in Kelmscott | Reliable Auto Servicing & Repairs',
     description:
-      'Logbook servicing, brakes, diagnostics & auto repairs in Armadale WA. Honest advice, same-day turnaround, warranty protected.',
-    url: 'https://carmechanicperth.com', // Replace with your actual domain
+      'Logbook servicing, brakes, diagnostics & auto repairs in Kelmscott and Armadale WA. Honest advice, same-day turnaround, warranty protected.',
+    url: 'https://carmechanicperth.com',
     siteName: 'Car Mechanic Perth',
     locale: 'en_AU',
     type: 'website',
@@ -48,12 +50,15 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#0B0F17]">
+    <main className="min-h-screen bg-white">
       <Hero />
+      <AboutUs />
       <WhyChooseUs />
       <LocalPrices />
+      <OurProcess />
       <Servingareas />
       <ReviewsSection />
+      <FAQSection />
       <BookingSection />
       <Map />
     </main>

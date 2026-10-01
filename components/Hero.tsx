@@ -128,7 +128,7 @@ export default function Hero() {
 
       {/* 4. BOTTOM FEATURE STRIP WITH GRADIENT ICON BOXES */}
       <div className="relative z-10 w-full border-t border-slate-200/80 bg-white/90 backdrop-blur-md py-4 sm:py-5 px-4 sm:px-6 lg:px-12 shadow-inner">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-start gap-4 sm:gap-12">
+        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-center gap-4 sm:gap-20">
           {features.map((feature, idx) => {
             const IconComponent = feature.icon;
             return (

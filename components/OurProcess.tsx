@@ -16,7 +16,9 @@ export default function OurProcess() {
     <section className="relative w-full bg-slate-50 text-slate-900 py-16 sm:py-20 border-b border-slate-200/80">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
         <div className="text-center max-w-2xl mx-auto space-y-4 mb-10 sm:mb-12">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-slate-900">Our Process</h2>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-slate-900">
+            Our <span className="text-transparent bg-clip-text bg-[linear-gradient(to_right,#FF6B00,#FF8C42,#4A90D9,#1E90FF)]">Process</span>
+          </h2>
           <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-medium text-justify">
             At Car Mechanic Perth, our process is built around clarity and reliability. We begin with a detailed vehicle inspection and honest diagnosis. Our process typically includes:
           </p>

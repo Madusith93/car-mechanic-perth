@@ -109,7 +109,7 @@ export default function ReviewsSection() {
             className="text-3xl xs:text-4xl sm:text-5xl font-black tracking-tight leading-[1.15] text-slate-900"
           >
             {headingLine1}{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] via-[#F97316] via-[#00D2FF] to-[#0052D4]">
+            <span className="text-transparent bg-clip-text bg-[linear-gradient(to_right,#FF6B00,#FF8C42,#4A90D9,#1E90FF)]">
               {headingHighlight}
             </span>
           </motion.h2>

@@ -98,7 +98,7 @@ export default function ServicesSection() {
 
             <h2 className="text-3xl xs:text-4xl sm:text-5xl font-black tracking-tight leading-[1.15] text-slate-900">
               {headingLine1} <br className="hidden xs:block" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] via-[#F97316] to-[#EAB308]">
+              <span className="text-transparent bg-clip-text bg-[linear-gradient(to_right,#FF6B00,#FF8C42,#4A90D9,#1E90FF)]">
                 {headingHighlight}
               </span>
             </h2>

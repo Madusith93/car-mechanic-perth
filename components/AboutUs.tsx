@@ -21,7 +21,7 @@ export default function AboutUs() {
           </div>
 
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-slate-900">
-            About <span className="text-[#FF6B00]">Us</span>
+            About <span className="text-transparent bg-clip-text bg-[linear-gradient(to_right,#FF6B00,#FF8C42,#4A90D9,#1E90FF)]">Us</span>
           </h2>
         </div>
 

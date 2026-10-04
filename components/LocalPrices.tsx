@@ -59,7 +59,7 @@ export default function WhyChooseUsSection() {
 
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight text-slate-900">
               {headingLine1} <br />
-              <span className="text-[#FF6B00]">{headingHighlight}</span>
+              <span className="text-transparent bg-clip-text bg-[linear-gradient(to_right,#FF6B00,#FF8C42,#4A90D9,#1E90FF)]">{headingHighlight}</span>
             </h2>
 
             <p className="text-slate-600 text-sm leading-relaxed font-medium">

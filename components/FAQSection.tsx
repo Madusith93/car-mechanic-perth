@@ -32,7 +32,7 @@ export default function FAQSection() {
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-12">
         <div className="text-center space-y-3 mb-10">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-slate-900">
-            Frequently Asked <span className="text-[#FF6B00]">Questions</span>
+            Frequently Asked <span className="text-transparent bg-clip-text bg-[linear-gradient(to_right,#FF6B00,#FF8C42,#4A90D9,#1E90FF)]">Questions</span>
           </h2>
         </div>
         <ServiceFaqAccordion items={FAQS} />

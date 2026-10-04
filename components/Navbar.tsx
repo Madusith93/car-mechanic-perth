@@ -42,11 +42,10 @@ export default function Navbar() {
             <span className="font-black text-xl sm:text-2xl tracking-tight uppercase text-slate-900 group-hover:text-[#0052D4] transition-colors duration-300">
               CAR MECHANIC
             </span>
-            <span className="font-black text-xs sm:text-sm tracking-[0.22em] uppercase text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] via-[#00D2FF] to-[#0052D4] mt-0.5">
+            <span className="font-black text-xs sm:text-sm tracking-[0.22em] uppercase text-transparent bg-clip-text bg-[linear-gradient(to_right,#FF6B00,#0072FF,#0052D4,#003B95)] mt-0.5">
               PERTH
             </span>
           </div>
-
         </Link>
 
         {/* NAVIGATION LINKS WITH VIBRANT BLUE HOVER ACCENTS */}

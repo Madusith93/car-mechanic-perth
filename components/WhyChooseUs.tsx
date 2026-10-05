@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { CheckCircle2, Wrench } from 'lucide-react';
+import { CheckCircle2, Wrench, ArrowRight } from 'lucide-react';
 import { useCms } from '@/context/CmsContext';
 
 const DEFAULTS = {
@@ -16,32 +16,26 @@ const DEFAULTS = {
     {
       title: 'Expert Vehicle Servicing',
       desc: 'A full logbook service means oil, filters, fluids and safety checks done properly, not rushed. This is where being the best car mechanic actually shows, in the details most workshops skip.',
-      href: '/services/full-car-service',
     },
     {
       title: 'Professional Brake Repairs',
       desc: 'Worn brakes don\u2019t always make noise before they fail. We check pads, discs and fluid properly, replace what\u2019s needed and explain exactly what we found, so nothing gets swapped out unnecessarily.',
-      href: '/services/brakes-repairs',
     },
     {
       title: 'Advanced Engine Diagnostics',
       desc: 'When a warning light comes on, guessing isn\u2019t good enough. We run proper diagnostics to find the actual fault, then explain the fix and the cost before touching anything.',
-      href: '/services/engine-repair',
     },
     {
       title: 'Suspension & Steering Care',
       desc: 'A rough ride or a car pulling to one side usually points to suspension or steering wear. We inspect shocks, struts, bushes and alignment, then fix only what\u2019s actually worn.',
-      href: '/services/suspension-shock-absorbers',
     },
     {
       title: 'Complete Air Conditioning',
       desc: 'Air conditioning that struggles in a Perth summer is more than an inconvenience. We check refrigerant levels, hunt down leaks and service the whole system so it actually cools again.',
-      href: '/services/air-conditioning',
     },
     {
       title: 'Tyres & Wheel Services',
       desc: 'We stock a range of tyre brands and fit, balance and align wheels correctly the first time. If you\u2019re not sure what tyre suits your car and budget, just ask us.',
-      href: '/services/tyres-wheels',
     },
   ],
 };
@@ -111,7 +105,7 @@ export default function ServicesSection() {
               {services.map((item, idx) => (
                 <Link
                   key={idx}
-                  href={item.href}
+                  href="/services"
                   className="group bg-white border border-slate-200/90 hover:border-[#FF6B00] p-4 sm:p-5 rounded-2xl space-y-2 transition-all duration-300 shadow-sm hover:shadow-md hover:shadow-[#FF6B00]/10 block"
                 >
                   <div className="flex items-center gap-2.5">
@@ -125,6 +119,16 @@ export default function ServicesSection() {
                   </p>
                 </Link>
               ))}
+            </div>
+
+            <div className="pt-2">
+              <Link
+                href="/services"
+                className="inline-flex items-center gap-2 text-sm font-extrabold text-[#FF6B00] hover:text-[#e05e00] transition-colors group"
+              >
+                <span>View All Services</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
             </div>
 
           </div>
